@@ -1,0 +1,59 @@
+# IntelliJ IDEA specific files
+.idea/
+*.iml
+*.iws
+
+# macOS specific files
+.DS_Store
+
+# Log files
+*.log
+
+# Node.js specific files
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Java specific files
+target/
+*.class
+
+# Maven specific files
+.mvn/
+!/.mvn/wrapper/maven-wrapper.jar
+**/mvn/wrapper/maven-wrapper.jar
+
+# Gradle specific files
+.gradle/
+build/
+
+# Python specific files
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Docker specific files
+*.log
+*.pid
+*.seed
+*.pid.lock
+.env
+.venv
+docker-compose.override.yml
+.dockerignore
+
+# Kubernetes specific files
+*.yaml
+*.yml
+
+# Other
+*.swp
+*~
