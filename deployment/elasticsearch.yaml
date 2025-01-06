@@ -4,7 +4,7 @@ metadata:
   name: es-cluster
 spec:
   serviceName: elasticsearch
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: elasticsearch
@@ -87,9 +87,25 @@ spec:
     - protocol: TCP
       port: 9200
       targetPort: 9200
-      nodePort: 30001  # Dışarıya açılacak port
-  type: NodePort
-
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: elasticsearch
+  namespace: default
+spec:
+  rules:
+    - host: elasticsearch.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: elasticsearch
+                port:
+                  number: 9200
 
 
 

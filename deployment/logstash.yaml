@@ -5,8 +5,31 @@ metadata:
   namespace: default
 data:
   logstash.conf: |
-    input { beats { port => 5044 } }
-    output { stdout { codec => rubydebug } }
+    input {
+      tcp {
+        port => 5044
+        codec => json
+        type => "json"
+      }
+    }
+    
+    filter {
+      if [type] == "json" {
+        json {
+          source => "message"
+        }
+      }
+    }
+    
+    output {
+      elasticsearch {
+        hosts => ["http://elasticsearch.default.svc.cluster.local:9200"]
+        index => "logstash-%{+YYYY.MM.dd}"
+      }
+      stdout {
+        codec => rubydebug
+      }
+    }
   logstash.yml: |
     path.config: /usr/share/logstash/pipeline
     http.host: "0.0.0.0"
@@ -14,7 +37,7 @@ data:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: logstash-deployment
+  name: logstash
   namespace: default
 spec:
   replicas: 1
@@ -33,10 +56,14 @@ spec:
             - containerPort: 5044
           env:
             - name: LOGSTASH_PATH_CONFIG
-              value: /usr/share/logstash/config  # Boşluk hatası düzeltildi
+              value: /usr/share/logstash/config
           volumeMounts:
             - name: config-volume
-              mountPath: /usr/share/logstash/config
+              mountPath: /usr/share/logstash/pipeline/logstash.conf
+              subPath: logstash.conf
+            - name: config-volume
+              mountPath: /usr/share/logstash/config/logstash.yml
+              subPath: logstash.yml
       volumes:
         - name: config-volume
           configMap:
@@ -45,9 +72,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: logstash-service
+  name: logstash
   namespace: default
 spec:
+  type: ClusterIP
   selector:
     app: logstash
   ports:
