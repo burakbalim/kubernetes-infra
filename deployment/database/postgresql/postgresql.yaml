@@ -1,0 +1,100 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgres-master
+spec:
+  serviceName: postgres-master
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+      role: master
+  template:
+    metadata:
+      labels:
+        app: postgres
+        role: master
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:15
+          env:
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secrets
+                  key: POSTGRES_DB
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secrets
+                  key: POSTGRES_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secrets
+                  key: POSTGRES_PASSWORD
+            - name: PRIMARY_HOST
+              value: "postgres-master.default.svc.cluster.local"
+            - name: REPLICA_HOST
+              value: "postgres-slave.default.svc.cluster.local"
+          ports:
+            - containerPort: 5432
+          volumeMounts:
+            - name: postgres-master-data
+              mountPath: /var/lib/postgresql/data
+          readinessProbe:
+            exec:
+              command:
+                - pg_isready
+                - -U
+                - postgres
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          resources:
+            requests:
+              memory: "2Gi"
+              cpu: "500m"
+            limits:
+              memory: "4Gi"
+              cpu: "1000m"
+  volumeClaimTemplates:
+    - metadata:
+        name: postgres-master-data
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: 100Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-master
+spec:
+  selector:
+    app: postgres
+    role: master
+  ports:
+    - port: 5432
+      targetPort: 5432
+  type: LoadBalancer
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: postgres-master-network-policy
+spec:
+  podSelector:
+    matchLabels:
+      app: postgres
+      role: master
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - ipBlock:
+            cidr: 0.0.0.0/0
+      ports:
+        - protocol: TCP
+          port: 5432
