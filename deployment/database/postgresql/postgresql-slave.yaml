@@ -1,0 +1,116 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgres-slave
+spec:
+  serviceName: postgres-slave
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+      role: slave
+  template:
+    metadata:
+      labels:
+        app: postgres
+        role: slave
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:15
+          command:
+            - bash
+            - -c
+            - |
+              until pg_basebackup -h postgres-master -D /var/lib/postgresql/data -U postgresuser -v -P -R -X stream; do
+                echo "Waiting for master to connect..."
+                sleep 1
+              done
+              echo "host replication all 0.0.0.0/0 md5" >> /var/lib/postgresql/data/pg_hba.conf
+              postgres
+          env:
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secrets
+                  key: POSTGRES_DB
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secrets
+                  key: POSTGRES_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secrets
+                  key: POSTGRES_PASSWORD
+            - name: PRIMARY_HOST
+              value: "postgres-master.default.svc.cluster.local"
+            - name: REPLICA_HOST
+              value: "postgres-slave.default.svc.cluster.local"
+          ports:
+            - containerPort: 5432
+          volumeMounts:
+            - name: postgres-slave-data
+              mountPath: /var/lib/postgresql/data
+          readinessProbe:
+            exec:
+              command:
+                - pg_isready
+                - -U
+                - postgresuser
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          resources:
+            requests:
+              memory: "2Gi"
+              cpu: "500m"
+            limits:
+              memory: "4Gi"
+              cpu: "1000m"
+  volumeClaimTemplates:
+    - metadata:
+        name: postgres-slave-data
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: 100Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-slave
+  annotations:
+  # Cloud specific annotations
+  # service.beta.kubernetes.io/aws-load-balancer-type: nlb  # AWS
+  # service.beta.kubernetes.io/azure-load-balancer-internal: "false"  # Azure
+spec:
+  selector:
+    app: postgres
+    role: slave
+  ports:
+    - port: 5432
+      targetPort: 5432
+  type: LoadBalancer
+  # Opsiyonel: Sabit IP için
+  # loadBalancerIP: your-static-ip
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: postgres-slave-network-policy
+spec:
+  podSelector:
+    matchLabels:
+      app: postgres
+      role: slave
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - ipBlock:
+            cidr: 0.0.0.0/0
+      ports:
+        - protocol: TCP
+          port: 5432
