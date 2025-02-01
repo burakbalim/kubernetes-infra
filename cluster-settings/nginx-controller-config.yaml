@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ingress-nginx-controller
+  labels:
+    app.kubernetes.io/name: ingress-nginx
+    app.kubernetes.io/part-of: ingress-nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: ingress-nginx
+      app.kubernetes.io/part-of: ingress-nginx
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: ingress-nginx
+        app.kubernetes.io/part-of: ingress-nginx
+    spec:
+      containers:
+        - image: registry.k8s.io/ingress-nginx/controller:v1.0.5
+          name: controller
+          args:
+            - /nginx-ingress-controller
+            - --tcp-services-configmap=ingress-nginx/tcp-services
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-configuration
+  namespace: ingress-nginx
+data:
+  # Basic Settings
+  use-forwarded-headers: "true"
+  compute-full-forwarded-for: "true"
+  proxy-buffer-size: "16k"
+  proxy-body-size: "1m"  # Limit request body size to 1MB
+
+  # Connection Limits
+  limit-conn-zone: "$binary_remote_addr zone=addr:10m"
+  limit-conn: "5"  # Max 5 concurrent connections per IP
+
+  # Rate Limiting
+  limit-req-zone: "$binary_remote_addr zone=req_limit:10m rate=10r/s"
+  limit-req: "zone=req_limit burst=20 nodelay"
+
+  # Timeouts
+  proxy-connect-timeout: "10"
+  proxy-read-timeout: "30"
+  proxy-send-timeout: "30"
+
+  # Security Headers
+  ssl-protocols: "TLSv1.2 TLSv1.3"
+  ssl-ciphers: "ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384"
+
+  # CORS Settings
+  enable-cors: "true"
+  cors-allow-methods: "GET, PUT, POST, DELETE, PATCH, OPTIONS"
+  cors-allow-headers: "DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization"
+
+  # Logging
+  access-log-path: "/var/log/nginx/access.log"
+  error-log-path: "/var/log/nginx/error.log"
+  log-format-upstream: '$remote_addr - $remote_user [$time_local] "$request" $status $body_bytes_sent "$http_referer" "$http_user_agent" $request_length $request_time [$proxy_upstream_name] [$proxy_alternative_upstream_name] $upstream_addr $upstream_response_length $upstream_response_time $upstream_status $req_id'

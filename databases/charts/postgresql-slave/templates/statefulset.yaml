@@ -1,0 +1,99 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Release.Name }}-postgres-slave
+spec:
+  serviceName: {{ .Release.Name }}-postgres-slave
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: postgres
+      role: slave
+  template:
+    metadata:
+      labels:
+        app: postgres
+        role: slave
+    spec:
+      initContainers:
+        - name: fix-permissions
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          command: ["sh", "-c", "chmod -R 0700 /var/lib/postgresql/data && chown -R 999:999 /var/lib/postgresql/data"]
+          volumeMounts:
+            - name: postgres-slave-data
+              mountPath: /var/lib/postgresql/data
+      containers:
+        - name: postgres
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          securityContext:
+            runAsUser: 999
+            runAsGroup: 999
+          command:
+            - bash
+            - -c
+            - |
+              if [ ! -s "/var/lib/postgresql/data/PG_VERSION" ]; then
+                echo "Initializing replica..."
+                rm -rf /var/lib/postgresql/data/*
+                chmod 700 /var/lib/postgresql/data
+                chown -Rf postgres:postgres /var/lib/postgresql/data
+
+                until pg_basebackup -h {{ .Values.primaryHost }} -D /var/lib/postgresql/data -U postgres -v -P -X stream; do
+                  echo "Waiting for master to connect..."
+                  sleep 5
+                done
+
+                cp -f /etc/postgresql/postgresql.conf /var/lib/postgresql/data/postgresql.conf
+                cp -f /etc/postgresql/pg_hba.conf /var/lib/postgresql/data/pg_hba.conf
+                chmod 600 /var/lib/postgresql/data/postgresql.conf
+                chmod 600 /var/lib/postgresql/data/pg_hba.conf
+                chown postgres:postgres /var/lib/postgresql/data/postgresql.conf
+                chown postgres:postgres /var/lib/postgresql/data/pg_hba.conf
+
+                echo "primary_slot_name = '{{ .Values.replicaSlot }}'" >> /var/lib/postgresql/data/postgresql.conf
+                echo "recovery_target_timeline = 'latest'" >> /var/lib/postgresql/data/postgresql.conf
+              fi
+              exec postgres
+          envFrom:
+            - configMapRef:
+                name: {{ .Release.Name }}-postgres-slave-config
+          ports:
+            - containerPort: 5432
+          volumeMounts:
+            - name: postgres-slave-data
+              mountPath: /var/lib/postgresql/data
+            - name: postgres-config-volume
+              mountPath: /etc/postgresql/postgresql.conf
+              subPath: postgresql.conf
+              readOnly: false
+            - name: postgres-config-volume
+              mountPath: /etc/postgresql/pg_hba.conf
+              subPath: pg_hba.conf
+              readOnly: false
+          readinessProbe:
+            exec:
+              command:
+                - pg_isready
+                - -U
+                - postgres
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          resources:
+            requests:
+              memory: "{{ .Values.resources.requests.memory }}"
+              cpu: "{{ .Values.resources.requests.cpu }}"
+            limits:
+              memory: "{{ .Values.resources.limits.memory }}"
+              cpu: "{{ .Values.resources.limits.cpu }}"
+      volumes:
+        - name: postgres-config-volume
+          configMap:
+            name: {{ .Release.Name }}-postgres-slave-config
+  volumeClaimTemplates:
+    - metadata:
+        name: postgres-slave-data
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: {{ .Values.storage.size }}

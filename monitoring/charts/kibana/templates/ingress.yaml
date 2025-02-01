@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "kibana.fullname" . }}-ingress
+  namespace: {{ .Release.Namespace }}
+spec:
+  rules:
+    - host: {{ .Values.ingress.host }}
+      http:
+        paths:
+          - path: {{ .Values.server.basePath }}
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ include "kibana.fullname" . }}
+                port:
+                  number: 5601
