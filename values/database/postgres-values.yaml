@@ -1,0 +1,32 @@
+replicas: 1
+
+primaryHost: "postgres-master.default.svc.cluster.local"
+replicaHost: "postgres-slave.default.svc.cluster.local"
+
+image:
+  repository: postgres
+  tag: "15"
+
+service:
+  type: LoadBalancer
+
+storage:
+  size: "100Gi"
+
+postgresqlConfig:
+  listen_addresses = '*'
+  max_connections = 100
+  shared_buffers = 128MB
+  wal_level = replica
+  max_wal_senders = 3
+  max_replication_slots = 10
+  wal_keep_size = 64MB
+  hot_standby = on
+
+pgHbaConfig:
+  local   all             all                                    trust
+  host    all             all             0.0.0.0/0              trust
+  host    replication     postgres        0.0.0.0/0              trust
+  host    api-gw          postgres        0.0.0.0/0              trust
+
+

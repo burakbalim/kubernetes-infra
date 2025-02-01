@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "kibana.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/name: kibana
+    app.kubernetes.io/instance: {{ .Release.Name }}
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: kibana
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: kibana
+        app.kubernetes.io/instance: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: kibana
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          env:
+            - name: SERVER_NAME
+              value: {{ .Values.server.name }}
+            - name: SERVER_BASEPATH
+              value: {{ .Values.server.basePath }}
+            - name: SERVER_REWRITEBASEPATH
+              value: "{{ .Values.server.rewriteBasePath }}"
+          readinessProbe:
+            httpGet:
+              path: {{ .Values.server.basePath }}/api/status
+              port: 5601
+            initialDelaySeconds: {{ .Values.probes.readiness.initialDelaySeconds }}
+            periodSeconds: {{ .Values.probes.readiness.periodSeconds }}
+          livenessProbe:
+            httpGet:
+              path: {{ .Values.server.basePath }}/api/status
+              port: 5601
+            initialDelaySeconds: {{ .Values.probes.liveness.initialDelaySeconds }}
+            periodSeconds: {{ .Values.probes.liveness.periodSeconds }}
+          ports:
+            - containerPort: 5601

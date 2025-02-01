@@ -1,0 +1,80 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Release.Name }}-master
+spec:
+  serviceName: {{ .Release.Name }}-master
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: postgres
+      role: master
+  template:
+    metadata:
+      labels:
+        app: postgres
+        role: master
+    spec:
+      initContainers:
+        - name: fix-permissions-master
+          image: postgres:15
+          command: [ "sh", "-c", "chmod -R 0700 /var/lib/postgresql/data && chown -R 999:999 /var/lib/postgresql/data" ]
+          securityContext:
+            runAsUser: 0
+          volumeMounts:
+            - name: postgres-master-data
+              mountPath: /var/lib/postgresql/data
+      containers:
+        - name: postgres
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          securityContext:
+            runAsUser: 999
+            runAsGroup: 999
+          command:
+            - sh
+            - -c
+            - |
+              if [ ! -f /var/lib/postgresql/data/PG_VERSION ]; then
+                 initdb -D /var/lib/postgresql/data
+              fi
+              cp -f /etc/postgresql/postgresql.conf /var/lib/postgresql/data/postgresql.conf
+              cp -f /etc/postgresql/pg_hba.conf /var/lib/postgresql/data/pg_hba.conf
+              chmod 600 /var/lib/postgresql/data/postgresql.conf
+              chmod 600 /var/lib/postgresql/data/pg_hba.conf
+              exec postgres
+          envFrom:
+            - configMapRef:
+                name: {{ .Release.Name }}-config
+            - secretRef:
+                name: {{ .Release.Name }}-secrets
+          ports:
+            - containerPort: 5432
+          volumeMounts:
+            - name: postgres-master-data
+              mountPath: /var/lib/postgresql/data
+            - name: config-volume
+              mountPath: /etc/postgresql/postgresql.conf
+              subPath: postgresql.conf
+            - name: config-volume
+              mountPath: /etc/postgresql/pg_hba.conf
+              subPath: pg_hba.conf
+          readinessProbe:
+            exec:
+              command:
+                - pg_isready
+                - -U
+                - postgres
+            initialDelaySeconds: 5
+            periodSeconds: 10
+      volumes:
+        - name: config-volume
+          configMap:
+            name: {{ .Release.Name }}-config
+  volumeClaimTemplates:
+      - metadata:
+          name: postgres-master-data
+        spec:
+          accessModes: [ "ReadWriteOnce" ]
+          resources:
+            requests:
+              storage: {{ .Values.storage.size }}

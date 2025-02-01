@@ -1,0 +1,22 @@
+image:
+  repository: docker.elastic.co/kibana/kibana
+  tag: 7.15.0
+
+server:
+  name: kibana
+  basePath: /kibana
+  rewriteBasePath: "true"
+
+service:
+  type: ClusterIP
+
+ingress:
+  host: logging.local
+
+probes:
+  readiness:
+    initialDelaySeconds: 5
+    periodSeconds: 10
+  liveness:
+    initialDelaySeconds: 15
+    periodSeconds: 20
