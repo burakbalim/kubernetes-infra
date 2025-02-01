@@ -1,5 +1,6 @@
 # IntelliJ IDEA specific files
 .idea/
+.idea/dataSources
 *.iml
 *.iws
 
@@ -57,3 +58,4 @@ docker-compose.override.yml
 # Other
 *.swp
 *~
+/.idea/
