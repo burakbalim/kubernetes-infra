@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: {{ .Release.Name }}-master
+  name: {{ include "postgres.fullname" . }}
 spec:
-  serviceName: {{ .Release.Name }}-master
+  serviceName: {{ include "postgres.fullname" .}}
   replicas: {{ .Values.replicas }}
   selector:
     matchLabels:
@@ -22,7 +22,7 @@ spec:
           securityContext:
             runAsUser: 0
           volumeMounts:
-            - name: postgres-master-data
+            - name: {{ include "postgres.fullname" . }}-data
               mountPath: /var/lib/postgresql/data
       containers:
         - name: postgres
@@ -44,13 +44,11 @@ spec:
               exec postgres
           envFrom:
             - configMapRef:
-                name: {{ .Release.Name }}-config
-            - secretRef:
-                name: {{ .Release.Name }}-secrets
+                name: {{ include "postgres.fullname" . }}-config
           ports:
             - containerPort: 5432
           volumeMounts:
-            - name: postgres-master-data
+            - name: {{ include "postgres.fullname" . }}-data
               mountPath: /var/lib/postgresql/data
             - name: config-volume
               mountPath: /etc/postgresql/postgresql.conf
@@ -69,10 +67,10 @@ spec:
       volumes:
         - name: config-volume
           configMap:
-            name: {{ .Release.Name }}-config
+            name: {{ include "postgres.fullname" . }}-config
   volumeClaimTemplates:
       - metadata:
-          name: postgres-master-data
+          name: {{ include "postgres.fullname" . }}-data
         spec:
           accessModes: [ "ReadWriteOnce" ]
           resources:
