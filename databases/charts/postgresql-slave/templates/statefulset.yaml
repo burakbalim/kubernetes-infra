@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: {{ .Release.Name }}-postgres-slave
+  name: {{ include "postgres-slave.fullname" . }}
 spec:
-  serviceName: {{ .Release.Name }}-postgres-slave
+  serviceName: {{ include "postgres-slave.fullname" . }}
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
@@ -20,7 +20,7 @@ spec:
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
           command: ["sh", "-c", "chmod -R 0700 /var/lib/postgresql/data && chown -R 999:999 /var/lib/postgresql/data"]
           volumeMounts:
-            - name: postgres-slave-data
+            - name: {{ include "postgres-slave.fullname" . }}-data
               mountPath: /var/lib/postgresql/data
       containers:
         - name: postgres
@@ -56,11 +56,11 @@ spec:
               exec postgres
           envFrom:
             - configMapRef:
-                name: {{ .Release.Name }}-postgres-slave-config
+                name: {{ include "postgres-slave.fullname" . }}-config
           ports:
             - containerPort: 5432
           volumeMounts:
-            - name: postgres-slave-data
+            - name: {{ include "postgres-slave.fullname" . }}-data
               mountPath: /var/lib/postgresql/data
             - name: postgres-config-volume
               mountPath: /etc/postgresql/postgresql.conf
@@ -88,7 +88,7 @@ spec:
       volumes:
         - name: postgres-config-volume
           configMap:
-            name: {{ .Release.Name }}-postgres-slave-config
+            name: {{ include "postgres-slave.fullname" . }}-config
   volumeClaimTemplates:
     - metadata:
         name: postgres-slave-data

@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ .Release.Name }}-config
+  name: {{ include "postgres.fullname" . }}-config
 data:
   PRIMARY_HOST: "{{ .Values.primaryHost }}"
   REPLICA_HOST: "{{ .Values.replicaHost }}"

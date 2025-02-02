@@ -41,6 +41,11 @@ spec:
           env:
             - name: JAVA_OPTS
               value: "{{ .Values.image.parameters }}"
+          envFrom:
+            - configMapRef:
+                name: {{ include "service.fullname" . }}-config
+            - secretRef:
+                name: {{ include "service.fullname" . }}-secret
           livenessProbe:
             {{- toYaml .Values.livenessProbe | nindent 12 }}
           readinessProbe:
