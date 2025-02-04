@@ -5,21 +5,20 @@ image:
   pullPolicy: IfNotPresent
   tag: latest
   pullSecret: ghcr-secret
-  parameters: "-Dspring.profiles.active=dev --enable-preview"
+
+env:
+  - name: "JAVA_OPTS"
+    value: "-Dspring.profiles.active=dev --enable-preview"
+  - name: "LOGGING_LOGSTASH_HOST"
+    value: "logstash.default.svc.cluster.local"
+  - name: "LOGGING_LOGSTASH_PORT"
+    value: "5044"
+
+configs:
+  - service-test-config
 
 secrets:
-  POSTGRES_USER: "postgres"
-  POSTGRES_PASSWORD: "o=a%!`@*hpib)3wg"
-  GW_AUTHORIZATION_SECRET: ""
-
-config:
-  POSTGRES_HOST: "postgres-master.default.svc.cluster.local:5432"
-  POSTGRES_POOL_SIZE: 10
-  REDIS_HOST: ""
-  REDIS_PORT: ""
-  MONGO_HOST: ""
-  MOUNTED_DIRECTORY: "/var/lib/api-gw/configuration/application"
-  LOGSTASH_HOST: "logstash.default.svc.cluster.local"
+  - service-test-secret
 
 nameOverride: ""
 fullnameOverride: ""
