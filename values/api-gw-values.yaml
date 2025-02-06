@@ -2,13 +2,13 @@ replicaCount: 1
 
 image:
   repository: ghcr.io/burakbalim/api-gw
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
   tag: latest
   pullSecret: ghcr-secret
 
 env:
   - name: "JAVA_OPTS"
-    value: "-Dspring.profiles.active=dev --enable-preview"
+    value: "-Dspring.profiles.active=test --enable-preview"
   - name: "LOGGING_LOGSTASH_HOST"
     value: "logstash.default.svc.cluster.local"
   - name: "LOGGING_LOGSTASH_PORT"
