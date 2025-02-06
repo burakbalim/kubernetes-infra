@@ -39,13 +39,21 @@ spec:
               containerPort: {{ .Values.service.port }}
               protocol: TCP
           env:
-            - name: JAVA_OPTS
-              value: "{{ .Values.image.parameters }}"
+            {{- range .Values.env }}
+            - name: "{{ .name }}"
+              value: "{{ .value }}"
+            {{- end }}
           envFrom:
+            {{- range .Values.configs }}
             - configMapRef:
-                name: {{ include "service.fullname" . }}-config
+                name: {{ . | quote }}
+            {{- end }}
+
+            {{- range .Values.secrets }}
             - secretRef:
-                name: {{ include "service.fullname" . }}-secret
+                name: {{ . | quote }}
+            {{- end }}
+
           livenessProbe:
             {{- toYaml .Values.livenessProbe | nindent 12 }}
           readinessProbe:
