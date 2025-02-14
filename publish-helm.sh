@@ -5,30 +5,33 @@ set -e
 GITHUB_USER="burakbalim"
 REPO_NAME="kubernetes-infra"
 HELM_REPO_URL="https://${GITHUB_USER}.github.io/${REPO_NAME}/"
-HELM_CHARTS_DIR="kubernetes-infra"
-BRANCH="master"
 
-git pull origin ${BRANCH}
+REPO_ROOT=$(pwd)
+CHARTS_DIR="${REPO_ROOT}/helm-packages"
 
-rm -rf charts
-mkdir -p charts
+git pull origin master
 
-find ${HELM_CHARTS_DIR} -name "Chart.yaml" | while read chart; do
+rm -rf "${CHARTS_DIR}"
+mkdir -p "${CHARTS_DIR}"
+
+echo "🔍 Searching for Helm charts..."
+find applications databases monitoring -type f -name "Chart.yaml" | while read chart; do
     chart_dir=$(dirname "$chart")
+    parent_dir=$(basename "$(dirname "$chart_dir")")
     chart_name=$(basename "$chart_dir")
 
-    echo "📦 Packaging chart: $chart_name"
-    helm package "$chart_dir" -d charts/
+    echo "📦 Packaging chart: ${parent_dir}/${chart_name}"
+    helm package "$chart_dir" -d "${CHARTS_DIR}/"
 done
 
 echo "🔄 Updating Helm repo index..."
-helm repo index charts --url ${HELM_REPO_URL}
+helm repo index "${CHARTS_DIR}" --url "${HELM_REPO_URL}"
 
-mv charts/index.yaml .
+mv "${CHARTS_DIR}/index.yaml" "${REPO_ROOT}/index.yaml"
 
 echo "🚀 Pushing updates to GitHub..."
 git add .
 git commit -m "Update Helm repo index"
-git push origin ${BRANCH}
+git push origin master
 
 echo "✅ Helm charts successfully published at ${HELM_REPO_URL}"
