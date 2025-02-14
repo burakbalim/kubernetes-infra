@@ -6,8 +6,9 @@ GITHUB_USER="burakbalim"
 REPO_NAME="kubernetes-infra"
 HELM_REPO_URL="https://${GITHUB_USER}.github.io/${REPO_NAME}/"
 HELM_CHARTS_DIR="helm"
+BRANCH="master"
 
-git pull origin master
+git pull origin ${BRANCH}
 
 rm -rf charts
 mkdir -p charts
@@ -28,6 +29,6 @@ mv charts/index.yaml .
 echo "🚀 Pushing updates to GitHub..."
 git add .
 git commit -m "Update Helm repo index"
-git push origin main
+git push origin ${BRANCH}
 
 echo "✅ Helm charts successfully published at ${HELM_REPO_URL}"
