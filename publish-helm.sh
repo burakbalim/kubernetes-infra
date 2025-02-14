@@ -5,7 +5,7 @@ set -e
 GITHUB_USER="burakbalim"
 REPO_NAME="kubernetes-infra"
 HELM_REPO_URL="https://${GITHUB_USER}.github.io/${REPO_NAME}/"
-HELM_CHARTS_DIR="helm"
+HELM_CHARTS_DIR="kubernetes-infra"
 BRANCH="master"
 
 git pull origin ${BRANCH}
