@@ -1,0 +1,56 @@
+apiVersion: v1
+entries:
+  elasticsearch:
+  - apiVersion: v2
+    created: "2025-02-14T17:45:15.236171+03:00"
+    description: A Helm chart for deploying Grafana on Kubernetes
+    digest: 99b4bb2766c0da8ee907d84a17b74f1b123dbed8d550cce2f7db39bd68404742
+    name: elasticsearch
+    type: application
+    urls:
+    - https://burakbalim.github.io/kubernetes-infra/elasticsearch-0.1.0.tgz
+    version: 0.1.0
+  logstash:
+  - apiVersion: v2
+    appVersion: 7.15.0
+    created: "2025-02-14T17:45:15.236269+03:00"
+    description: A Helm chart for Logstash
+    digest: 35169719ec1400d4736f730ef9177e5e7ef3f9117b3ff68f9bb53dfc2c092774
+    name: logstash
+    type: application
+    urls:
+    - https://burakbalim.github.io/kubernetes-infra/logstash-1.0.0.tgz
+    version: 1.0.0
+  postgresql:
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2025-02-14T17:45:15.236362+03:00"
+    description: A Helm chart for Kubernetes
+    digest: 0ccb8231a5642095db98464525663f14df7068ca0a6a76bef99864a74f1e07b5
+    name: postgresql
+    type: application
+    urls:
+    - https://burakbalim.github.io/kubernetes-infra/postgresql-0.1.0.tgz
+    version: 0.1.0
+  prometheus:
+  - apiVersion: v2
+    appVersion: latest
+    created: "2025-02-14T17:45:15.236455+03:00"
+    description: A Helm chart for Prometheus deployment
+    digest: ec44fa761b8a046279294ab7a06ab9597d2070dbc57f7f2d6a519540b9ca04ec
+    name: prometheus
+    urls:
+    - https://burakbalim.github.io/kubernetes-infra/prometheus-1.0.0.tgz
+    version: 1.0.0
+  service:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2025-02-14T17:45:15.236587+03:00"
+    description: A Helm chart for Kubernetes
+    digest: 25af743bb2d8e8156f0071ab2e44906754269b3766e4354b6b6da52cd99ec333
+    name: service
+    type: application
+    urls:
+    - https://burakbalim.github.io/kubernetes-infra/service-0.1.0.tgz
+    version: 0.1.0
+generated: "2025-02-14T17:45:15.235724+03:00"
