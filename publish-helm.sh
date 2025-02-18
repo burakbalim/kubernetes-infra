@@ -4,7 +4,7 @@ set -e
 
 GITHUB_USER="burakbalim"
 REPO_NAME="kubernetes-infra"
-HELM_REPO_URL="https://${GITHUB_USER}.github.io/${REPO_NAME}/helm-packages"
+HELM_REPO_URL="https://${GITHUB_USER}.github.io/${REPO_NAME}"
 
 REPO_ROOT=$(pwd)
 CHARTS_DIR="${REPO_ROOT}/helm-packages"
@@ -25,7 +25,8 @@ find applications databases monitoring -type f -name "Chart.yaml" | while read c
 done
 
 echo "🔄 Updating Helm repo index..."
-helm repo index "${CHARTS_DIR}" --url "${HELM_REPO_URL}"
+rm -f "${REPO_ROOT}/index.yaml"
+helm repo index "${CHARTS_DIR}" --url "${HELM_REPO_URL}/helm-packages"
 
 mv "${CHARTS_DIR}/index.yaml" "${REPO_ROOT}/index.yaml"
 
