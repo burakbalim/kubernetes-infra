@@ -4,7 +4,7 @@ set -e
 
 GITHUB_USER="burakbalim"
 REPO_NAME="kubernetes-infra"
-HELM_REPO_URL="https://${GITHUB_USER}.github.io/${REPO_NAME}/"
+HELM_REPO_URL="https://${GITHUB_USER}.github.io/${REPO_NAME}/helm-packages"
 
 REPO_ROOT=$(pwd)
 CHARTS_DIR="${REPO_ROOT}/helm-packages"
