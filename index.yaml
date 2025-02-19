@@ -3,9 +3,9 @@ entries:
   config:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2025-02-19T22:57:51.779024+03:00"
+    created: "2025-02-19T23:08:38.461691+03:00"
     description: A Helm chart Config for Service
-    digest: c4fb6e93614d1a65f6740b188d6a0492c8e389e39bd5ca05ebac8e3f01320471
+    digest: 6353b80802961371ad15965eefe02f834265f4031ddafc70b1cf515b81f31624
     name: config
     type: application
     urls:
@@ -13,9 +13,9 @@ entries:
     version: 0.1.0
   elasticsearch:
   - apiVersion: v2
-    created: "2025-02-19T22:57:51.779139+03:00"
+    created: "2025-02-19T23:08:38.461795+03:00"
     description: A Helm chart for deploying Elasticsearch on Kubernetes
-    digest: f406be260a9d2fb9203e65ea6e5e1b39f38f146be3d5ccd7997682c5caeb7518
+    digest: 9347d586f516b289e1d375646ed92c43b1c53a69334aae256262a001cd5ad8c6
     name: elasticsearch
     type: application
     urls:
@@ -24,20 +24,20 @@ entries:
   logstash:
   - apiVersion: v2
     appVersion: 7.15.0
-    created: "2025-02-19T22:57:51.779226+03:00"
+    created: "2025-02-19T23:08:38.461881+03:00"
     description: A Helm chart for Logstash
-    digest: 2901b45d18891dcad523f4a52770992a0a0bce8db8497be5f3a75b8eea7622c2
+    digest: 9eea1a376ad810c2e0bba33ebf136c9550006d46be79c87f3b0eda5602dac841
     name: logstash
     type: application
     urls:
-    - https://burakbalim.github.io/kubernetes-infra/helm-packages/logstash-1.0.0.tgz
-    version: 1.0.0
+    - https://burakbalim.github.io/kubernetes-infra/helm-packages/logstash-0.1.0.tgz
+    version: 0.1.0
   postgresql:
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2025-02-19T22:57:51.779322+03:00"
+    created: "2025-02-19T23:08:38.461973+03:00"
     description: A Helm chart for Kubernetes
-    digest: b9afe68cd192b338648fd4201a29adf24713fd56df18d8d6d85131cf7753aa62
+    digest: 20bb21e43e7e874311fbe6a7dcda2544e901544bd6a141498c2e3e97915252ff
     name: postgresql
     type: application
     urls:
@@ -46,9 +46,9 @@ entries:
   postgresql-slave:
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2025-02-19T22:57:51.779421+03:00"
+    created: "2025-02-19T23:08:38.462074+03:00"
     description: A Helm chart for Kubernetes
-    digest: 5f22d50aa3ed57393b65a1c3fc8c2afe6d3001b98a6b0b065f986f9f59608ecf
+    digest: 35a2293a8282d8d3eb26416891a6b612a8a8603a0d08faa319a1b939296000e1
     name: postgresql-slave
     type: application
     urls:
@@ -57,9 +57,9 @@ entries:
   prometheus:
   - apiVersion: v2
     appVersion: latest
-    created: "2025-02-19T22:57:51.779515+03:00"
+    created: "2025-02-19T23:08:38.462165+03:00"
     description: A Helm chart for Prometheus deployment
-    digest: 1a2fa421485f83dee29897fb8c002e1374397a0f955cf6511d04b9425c9ff29a
+    digest: 4ccf055eb20c8bd2173d41ff751129b73bbfc7a7a789bae401a9a3a6a95404d0
     name: prometheus
     urls:
     - https://burakbalim.github.io/kubernetes-infra/helm-packages/prometheus-1.0.0.tgz
@@ -67,12 +67,12 @@ entries:
   service:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2025-02-19T22:57:51.779647+03:00"
+    created: "2025-02-19T23:08:38.462286+03:00"
     description: A Helm chart for Kubernetes
-    digest: be9a1605b40f904aa4a2dabaa603eee1a79ac788f74f6ead7334cd9515385297
+    digest: b8da430a56d487857740abaada2c13ffbc438c3582f1f82a601a3552c7802e7e
     name: service
     type: application
     urls:
     - https://burakbalim.github.io/kubernetes-infra/helm-packages/service-0.1.0.tgz
     version: 0.1.0
-generated: "2025-02-19T22:57:51.778831+03:00"
+generated: "2025-02-19T23:08:38.461495+03:00"
