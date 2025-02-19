@@ -27,7 +27,7 @@ serviceAccount:
   create: false
   automount: false
   annotations: {}
-  name: ""
+  name: "helm-deployer"
 
 podAnnotations: {}
 podLabels: {}
@@ -69,4 +69,3 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
-
