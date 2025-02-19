@@ -24,7 +24,7 @@ nameOverride: ""
 fullnameOverride: ""
 
 serviceAccount:
-  create: false
+  create: true
   automount: false
   annotations: {}
   name: "helm-deployer"
