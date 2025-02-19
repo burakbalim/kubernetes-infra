@@ -20,21 +20,11 @@ configs:
 secrets:
   - service-test-secret
 
-nameOverride: ""
-fullnameOverride: ""
-
 serviceAccount:
   create: true
   automount: false
   annotations: {}
   name: "helm-deployer"
-
-podAnnotations: {}
-podLabels: {}
-
-podSecurityContext: {}
-
-securityContext: {}
 
 service:
   fullname: "api-gw"
@@ -52,6 +42,15 @@ ingress:
         - path: /
           pathType: ImplementationSpecific
   tls: []
+
+
+nameOverride: ""
+fullnameOverride: ""
+
+podAnnotations: {}
+podLabels: {}
+podSecurityContext: {}
+securityContext: {}
 
 resources: {}
 
