@@ -8,7 +8,7 @@
 
 
 {{/* postgres.fullname */}}
-{{- define "postgres.fullname" -}}
+{{- define "postgres-slave.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
