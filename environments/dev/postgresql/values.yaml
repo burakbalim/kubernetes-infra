@@ -1,8 +1,5 @@
 replicas: 1
 
-primaryHost: "postgres-master.default.svc.cluster.local"
-replicaHost: "postgres-slave.default.svc.cluster.local"
-
 image:
   repository: postgres
   tag: "15"

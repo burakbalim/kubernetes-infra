@@ -3,8 +3,8 @@ kind: ConfigMap
 metadata:
   name: {{ include "postgres.fullname" . }}-config
 data:
-  PRIMARY_HOST: "{{ .Values.primaryHost }}"
-  REPLICA_HOST: "{{ .Values.replicaHost }}"
+  PRIMARY_HOST: "{{ include "postgres.primaryHost" . }}"
+  REPLICA_HOST: "{{ include "postgres.replicaHost" . }}"
   postgresql.conf: |
     listen_addresses = '*'
     max_connections = 100
