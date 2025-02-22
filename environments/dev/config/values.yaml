@@ -6,10 +6,8 @@ secrets:
   GW_AUTHORIZATION_SECRET: ""
 
 config:
-  POSTGRES_HOST: "postgres-master.{{ .Release.Namespace }}.svc.cluster.local:5432"
   POSTGRES_POOL_SIZE: 10
   REDIS_HOST: ""
   REDIS_PORT: ""
   MONGO_HOST: ""
   MOUNTED_DIRECTORY: "/var/lib/api-gw/configuration/application/"
-  LOGSTASH_HOST: "logstash.{{ .Release.Namespace }}.svc.cluster.local"
