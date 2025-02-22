@@ -1,3 +1,5 @@
+config.fullname: service-test
+
 secrets:
   POSTGRES_USER: "postgres"
   POSTGRES_PASSWORD: "o=a%!`@*hpib)3wg"
