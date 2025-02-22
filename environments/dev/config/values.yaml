@@ -1,4 +1,4 @@
-config.fullname: service-test
+fullnameOverride: "service-test"
 
 secrets:
   POSTGRES_USER: "postgres"
