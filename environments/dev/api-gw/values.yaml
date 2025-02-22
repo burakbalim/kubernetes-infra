@@ -44,8 +44,8 @@ ingress:
   tls: []
 
 
-nameOverride: ""
-fullnameOverride: ""
+nameOverride: "api-gw"
+fullnameOverride: "api-gw"
 
 podAnnotations: {}
 podLabels: {}
