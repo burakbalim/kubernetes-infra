@@ -27,4 +27,7 @@ pgHbaConfig:
   host    all             all             0.0.0.0/0              trust
   host    replication     postgres        0.0.0.0/0              trust
 
-
+tcpServices:
+  postgresMaster:
+    service: "postgres-master"
+    port: 5432

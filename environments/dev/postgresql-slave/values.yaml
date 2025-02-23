@@ -21,3 +21,8 @@ storage:
 
 service:
   type: "LoadBalancer"
+
+tcpServices:
+  postgresSlave:
+    service: "postgres-slave"
+    port: 5432
