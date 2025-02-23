@@ -1,7 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: tcp-services-postgres
-  namespace: ingress-nginx
-data:
-  "{{ .Values.tcpServices.postgresSlave.port }}": "{{ .Release.Namespace }}}/{{ .Values.tcpServices.postgresSlave.service }}:{{ .Values.tcpServices.postgresSlave.port }}"
