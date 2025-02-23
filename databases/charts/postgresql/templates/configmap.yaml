@@ -18,4 +18,3 @@ data:
     local   all             all                                    trust
     host    all             all             0.0.0.0/0              trust
     host    replication     postgres        0.0.0.0/0              trust
-    host    api-gw          postgres        0.0.0.0/0              trust
