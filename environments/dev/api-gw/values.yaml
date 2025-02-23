@@ -9,10 +9,6 @@ image:
 env:
   - name: "JAVA_OPTS"
     value: "-Dspring.profiles.active=test --enable-preview"
-  - name: "LOGGING_LOGSTASH_HOST"
-    value: "logstash.default.svc.cluster.local"
-  - name: "LOGGING_LOGSTASH_PORT"
-    value: "5044"
 
 configs:
   - service-test-config
@@ -52,20 +48,15 @@ podLabels: {}
 podSecurityContext: {}
 securityContext: {}
 
-resources: {}
-
 autoscaling:
   enabled: false
   minReplicas: 1
   maxReplicas: 100
   targetCPUUtilizationPercentage: 80
 
+resources: {}
 volumes: []
-
 volumeMounts: []
-
 nodeSelector: {}
-
 tolerations: []
-
 affinity: {}

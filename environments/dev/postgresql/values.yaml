@@ -1,5 +1,7 @@
 replicas: 1
 
+fullnameOverride: "postgres"
+
 image:
   repository: postgres
   tag: "15"
@@ -8,7 +10,7 @@ service:
   type: LoadBalancer
 
 storage:
-  size: "100Gi"
+  size: "20Gi"
 
 postgresqlConfig:
   listen_addresses = '*'
