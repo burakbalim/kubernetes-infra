@@ -7,7 +7,7 @@ image:
   tag: "15"
 
 service:
-  type: CLusterIP
+  type: ClusterIP
 
 storage:
   size: "20Gi"

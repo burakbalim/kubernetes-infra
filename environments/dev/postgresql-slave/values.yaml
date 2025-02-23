@@ -20,7 +20,7 @@ storage:
   size: "100Gi"
 
 service:
-  type: LoadBalancer
+  type: ClusterIP
 
 tcpServices:
   postgresSlave:
