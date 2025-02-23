@@ -16,8 +16,8 @@ storage:
 
 env:
   ES_JAVA_OPTS: "-Xms512m -Xmx512m"
-  discoverySeedHosts: "es-cluster-0.elasticsearch,es-cluster-1.elasticsearch"
-  initialMasterNodes: "es-cluster-0,es-cluster-1"
+  discoverySeedHosts: "es-cluster-0.elasticsearch"
+  initialMasterNodes: "es-cluster-0"
 
 service:
   type: "ClusterIP"
