@@ -1,5 +1,5 @@
 clusterName: "k8s-logs"
-replicaCount: 2
+replicaCount: 1
 
 image:
   repository: "docker.elastic.co/elasticsearch/elasticsearch"
@@ -15,7 +15,7 @@ storage:
   size: "1Gi"
 
 env:
-  ES_JAVA_OPTS: "-Xms512m -Xmx512m"
+  ES_JAVA_OPTS: "-Xms216m -Xmx512m"
   discoverySeedHosts: "es-cluster-0.elasticsearch"
   initialMasterNodes: "es-cluster-0"
 
