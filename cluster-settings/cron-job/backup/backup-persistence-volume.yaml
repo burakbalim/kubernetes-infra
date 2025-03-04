@@ -1,0 +1,23 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: velero-backup-pvc
+spec:
+  schedule: "0 */6 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: velero-sa
+          containers:
+            - name: velero
+              image: velero/velero:v1.11.0
+              command:
+                - /velero
+              args:
+                - backup
+                - create
+                - pvc-backup-prod
+                - --include-resources=persistentvolumeclaims,persistentvolumes
+                - --include-namespaces=to-3
+          restartPolicy: Never
