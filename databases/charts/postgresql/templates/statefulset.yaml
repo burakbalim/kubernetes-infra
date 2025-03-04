@@ -64,10 +64,7 @@ spec:
                 - postgres
             initialDelaySeconds: 5
             periodSeconds: 10
-      volumes:
-        - name: config-volume
-          configMap:
-            name: {{ include "postgres.fullname" . }}-config
+
       volumes:
         - name: config-volume
           configMap:
@@ -80,13 +77,13 @@ spec:
             claimName: {{ .Values.storage.existingClaim }}
   {{- else }}
   volumeClaimTemplates:
-        - metadata:
-            name: {{ include "postgres.fullname" . }}-data
-          spec:
-            accessModes: [ "ReadWriteOnce" ]
-            storageClassName: {{ .Values.storage.storageClass | default "" }}
-            resources:
-              requests:
-                storage: {{ .Values.storage.size }}
+    - metadata:
+        name: {{ include "postgres.fullname" . }}-data
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        storageClassName: {{ .Values.storage.storageClass | default "" }}
+        resources:
+          requests:
+            storage: {{ .Values.storage.size }}
   {{- end }}
 
