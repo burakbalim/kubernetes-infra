@@ -94,6 +94,7 @@ spec:
         name: postgres-slave-data
       spec:
         accessModes: [ "ReadWriteOnce" ]
+        storageClassName: {{ .Values.storage.storageClass | default "" }}
         resources:
           requests:
             storage: {{ .Values.storage.size }}

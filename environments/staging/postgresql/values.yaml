@@ -10,8 +10,8 @@ service:
   type: ClusterIP
 
 storage:
-  storageClass: local-storage-delete
-  size: "5Gi"
+  storageClass: local-storage-retain
+  size: "20Gi"
 
 postgresqlConfig:
   listen_addresses = '*'
@@ -27,4 +27,5 @@ pgHbaConfig:
   local   all             all                                    trust
   host    all             all             0.0.0.0/0              trust
   host    replication     postgres        0.0.0.0/0              trust
+
 

@@ -17,8 +17,8 @@ resources:
     cpu: "1000m"
 
 storage:
-  storageClass: local-storage-delete
-  size: "5Gi"
+  storageClass: local-storage-retain
+  size: "20Gi"
 
 service:
   type: ClusterIP
