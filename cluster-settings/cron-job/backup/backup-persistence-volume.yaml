@@ -19,5 +19,5 @@ spec:
                 - create
                 - pvc-backup-prod
                 - --include-resources=persistentvolumeclaims,persistentvolumes
-                - --include-namespaces=to-3
+                - --include-namespaces=to-2
           restartPolicy: Never

@@ -10,8 +10,10 @@ service:
   type: ClusterIP
 
 storage:
-  storageClass: local-storage-delete
-  size: "5Gi"
+  useExistingClaim: true
+  existingClaim: postgres-data-postgres-0
+  size: 10Gi
+  #storageClass: local-storage-delete
 
 postgresqlConfig:
   listen_addresses = '*'
