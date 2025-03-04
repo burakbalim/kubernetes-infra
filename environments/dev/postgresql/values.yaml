@@ -11,7 +11,7 @@ service:
 
 storage:
   useExistingClaim: true
-  #existingClaim: postgres-data-postgres-0
+  existingClaim: postgres-data-postgres-0
   size: 10Gi
   storageClass: local-storage-delete
 
