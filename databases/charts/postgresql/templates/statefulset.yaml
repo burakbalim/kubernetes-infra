@@ -68,6 +68,12 @@ spec:
         - name: config-volume
           configMap:
             name: {{ include "postgres.fullname" . }}-config
+        {{- if .Values.storage.useExistingClaim }}
+        - name: {{ include "postgres.fullname" . }}-data
+          persistentVolumeClaim:
+            claimName: {{ .Values.storage.existingClaim }}
+        {{- end }}
+  {{- if not .Values.storage.useExistingClaim }}
   volumeClaimTemplates:
       - metadata:
           name: {{ include "postgres.fullname" . }}-data
@@ -77,3 +83,4 @@ spec:
           resources:
             requests:
               storage: {{ .Values.storage.size }}
+  {{- end }}
