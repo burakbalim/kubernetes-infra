@@ -68,20 +68,12 @@ spec:
         - name: config-volume
           configMap:
             name: {{ include "postgres.fullname" . }}-config
-  {{- if .Values.storage.useExistingClaim }}
-      volumes:
-        - name: postgres-data
-          persistentVolumeClaim:
-            claimName: {{ .Values.storage.existingClaim }}
-  {{- else }}
   volumeClaimTemplates:
-    - metadata:
-        name: {{ include "postgres.fullname" . }}-data
-      spec:
-        accessModes: [ "ReadWriteOnce" ]
-        storageClassName: {{ .Values.storage.storageClass | default "" }}
-        resources:
-          requests:
-            storage: {{ .Values.storage.size }}
-  {{- end }}
-
+      - metadata:
+          name: {{ include "postgres.fullname" . }}-data
+        spec:
+          accessModes: [ "ReadWriteOnce" ]
+          storageClassName: {{ .Values.storage.storageClass | default "" }}
+          resources:
+            requests:
+              storage: {{ .Values.storage.size }}
