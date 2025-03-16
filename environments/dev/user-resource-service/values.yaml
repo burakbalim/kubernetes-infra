@@ -1,7 +1,7 @@
 replicaCount: 1
 
 image:
-  repository: ghcr.io/burakbalim/api-gw
+  repository: ghcr.io/burakbalim/user-resource-service
   pullPolicy: Always
   tag: latest
   pullSecret: ghcr-secret
@@ -23,7 +23,7 @@ serviceAccount:
   name: "helm-deployer"
 
 service:
-  fullname: "api-gw"
+  fullname: "user-resource-service"
   type: ClusterIP
   port: 80
   serviceAccountName: "helm-deployer"
