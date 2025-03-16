@@ -37,6 +37,25 @@ spec:
     {{- end }}
   {{- end }}
   rules:
+    {{- if .Values.ingress.customNamespace.enabled }}
+    - host: {{ printf "api-%s.%s" .Release.Namespace .Values.customNamespace.domain | quote }}
+      http:
+        paths:
+          - path: {{ .Values.ingress.defaultPath | default "/" }}
+            {{- if semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion }}
+            pathType: {{ .Values.ingress.defaultPathType | default "Prefix" }}
+            {{- end }}
+            backend:
+              {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
+              service:
+                name: {{ $fullName }}
+                port:
+                  number: {{ $svcPort }}
+              {{- else }}
+              serviceName: {{ $fullName }}
+              servicePort: {{ $svcPort }}
+              {{- end }}
+    {{- else }}
     {{- range .Values.ingress.hosts }}
     - host: {{ .host | quote }}
       http:
@@ -57,5 +76,6 @@ spec:
               servicePort: {{ $svcPort }}
               {{- end }}
           {{- end }}
+    {{- end }}
     {{- end }}
 {{- end }}

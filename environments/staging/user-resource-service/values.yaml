@@ -8,7 +8,7 @@ image:
 
 env:
   - name: "JAVA_OPTS"
-    value: "-Dspring.profiles.active=test --enable-preview"
+    value: "-Dspring.profiles.active=test"
 
 configs:
   - service-test-config
@@ -20,13 +20,13 @@ serviceAccount:
   create: true
   automount: false
   annotations: {}
-  name: "helm-deployer"
+  name: "default"
 
 service:
   fullname: "api-gw"
   type: ClusterIP
   port: 80
-  serviceAccountName: "helm-deployer"
+  serviceAccountName: "default"
 
 ingress:
   enabled: true
@@ -37,15 +37,15 @@ ingress:
   defaultPathType: "Prefix"
   annotations: {}
   hosts:
-    - host: "apigw.staging.wordflashy.com"
+    - host: "staging.wordflashy.com"
       paths:
-        - path: /gw
+        - path: /user-resource-service
           pathType: Prefix
   tls: []
 
 
-nameOverride: "api-gw"
-fullnameOverride: "api-gw"
+nameOverride: "user-resource-service"
+fullnameOverride: "user-resource-service"
 
 podAnnotations: {}
 podLabels: {}
@@ -55,7 +55,7 @@ securityContext: {}
 autoscaling:
   enabled: false
   minReplicas: 1
-  maxReplicas: 100
+  maxReplicas: 4
   targetCPUUtilizationPercentage: 80
 
 resources: {}
