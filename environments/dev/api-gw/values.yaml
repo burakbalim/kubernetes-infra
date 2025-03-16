@@ -30,13 +30,17 @@ service:
 
 ingress:
   enabled: true
-  className: ""
+  customNamespace:
+    enabled: true
+  className: "nginx"
+  defaultPath: "/"
+  defaultPathType: "Prefix"
   annotations: {}
   hosts:
-    - host: api-gw.local
+    - host: "testwordflashy.com"
       paths:
-        - path: /
-          pathType: ImplementationSpecific
+        - path: /gw
+          pathType: Prefix
   tls: []
 
 

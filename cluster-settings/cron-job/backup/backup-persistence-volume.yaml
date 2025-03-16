@@ -13,11 +13,11 @@ spec:
             - name: velero
               image: velero/velero:v1.11.0
               command:
-                - /velero
-              args:
-                - backup
-                - create
-                - pvc-backup-prod
-                - --include-resources=persistentvolumeclaims,persistentvolumes
-                - --include-namespaces=to-2
+                - sh
+                - -c
+                - |
+                  # Önce mevcut yedeği sil (varsa)
+                  /velero backup delete pvc-backup-prod --confirm
+                  # Sonra yeni yedek oluştur
+                  /velero backup create pvc-backup-prod --include-resources=persistentvolumeclaims,persistentvolumes --include-namespaces=staging
           restartPolicy: Never
