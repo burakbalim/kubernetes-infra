@@ -20,13 +20,13 @@ serviceAccount:
   create: true
   automount: false
   annotations: {}
-  name: "helm-deployer"
+  name: "user-resource-service"
 
 service:
   fullname: "user-resource-service"
   type: ClusterIP
   port: 80
-  serviceAccountName: "helm-deployer"
+  serviceAccountName: "user-resource-service"
 
 ingress:
   enabled: true

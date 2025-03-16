@@ -5,6 +5,7 @@ metadata:
 data:
   POSTGRES_HOST: "postgres.{{ .Release.Namespace }}.svc.cluster.local:5432"
   LOGSTASH_HOST: "logstash.{{ .Release.Namespace }}.svc.cluster.local"
+  OAUTH_USER_RESOURCE_URL: "user-resource-service.{{ .Release.Namespace }}.svc.cluster.local"
   POSTGRES_POOL_SIZE: {{ .Values.config.POSTGRES_POOL_SIZE | quote }}
   REDIS_HOST: {{ .Values.config.REDIS_HOST | quote }}
   REDIS_PORT: {{ .Values.config.REDIS_PORT | quote }}
