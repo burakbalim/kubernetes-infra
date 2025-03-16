@@ -1,10 +1,5 @@
 fullnameOverride: "service-test"
 
-secrets:
-  POSTGRES_USER: "postgres"
-  POSTGRES_PASSWORD: "o=a%!`@*hpib)3wg"
-  GW_AUTHORIZATION_SECRET: "S9GMlwEejPtoRNRd"
-
 config:
   POSTGRES_POOL_SIZE: 10
   REDIS_HOST: ""
