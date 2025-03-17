@@ -28,7 +28,6 @@ service:
   port: 80
   serviceAccountName: "helm-deployer"
 
-
 ingress:
   enabled: true
   customNamespace:
@@ -37,8 +36,9 @@ ingress:
   defaultPath: "/"
   defaultPathType: "Prefix"
   annotations:
-    nginx.ingress.kubernetes.io/configuration-snippet: |
-      real_ip_header CF-Connecting-IP;
+    # configuration-snippet yerine standart annotation'lar kullanın
+    # örneğin SSL-redirect için:
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
   hosts:
     - host: "apigw.staging.wordflashy.com"
       paths:
