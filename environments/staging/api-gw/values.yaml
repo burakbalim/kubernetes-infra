@@ -28,6 +28,7 @@ service:
   port: 80
   serviceAccountName: "helm-deployer"
 
+
 ingress:
   enabled: true
   customNamespace:
@@ -35,14 +36,18 @@ ingress:
   className: "nginx"
   defaultPath: "/"
   defaultPathType: "Prefix"
-  annotations: {}
+  annotations:
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      real_ip_header CF-Connecting-IP;
   hosts:
     - host: "apigw.staging.wordflashy.com"
       paths:
         - path: /gw
           pathType: Prefix
-  tls: []
-
+  tls:
+    - hosts:
+        - "apigw.staging.wordflashy.com"
+      secretName: apigw-staging-tls
 
 nameOverride: "api-gw"
 fullnameOverride: "api-gw"
