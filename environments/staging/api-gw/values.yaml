@@ -38,7 +38,7 @@ ingress:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-staging
   hosts:
-    - host: "apigw.stadging.wordflashy.com"
+    - host: "apigw.staging.wordflashy.com"
       paths:
         - path: /gw
           pathType: Prefix
