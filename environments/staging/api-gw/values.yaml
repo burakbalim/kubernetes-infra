@@ -36,11 +36,9 @@ ingress:
   defaultPath: "/"
   defaultPathType: "Prefix"
   annotations:
-    # configuration-snippet yerine standart annotation'lar kullanın
-    # örneğin SSL-redirect için:
-    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    cert-manager.io/cluster-issuer: letsencrypt-staging
   hosts:
-    - host: "apigw.staging.wordflashy.com"
+    - host: "apigw.stadging.wordflashy.com"
       paths:
         - path: /gw
           pathType: Prefix
