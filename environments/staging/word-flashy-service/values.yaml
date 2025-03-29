@@ -37,7 +37,7 @@ ingress:
   defaultPathType: "Prefix"
   annotations: {}
   hosts:
-    - host: "staging.int.wordflashy.com"
+    - host: "api.staging.int.wordflashy.com"
       paths:
         - path: /word-flashy-service
           pathType: Prefix
