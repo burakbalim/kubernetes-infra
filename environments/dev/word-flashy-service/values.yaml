@@ -47,7 +47,9 @@ ingress:
 nameOverride: "word-flashy-service"
 fullnameOverride: "word-flashy-service"
 
-podAnnotations: {}
+podAnnotations:
+  kubectl.kubernetes.io/restartedAt: {{ now | quote }}
+
 podLabels: {}
 podSecurityContext: {}
 securityContext: {}

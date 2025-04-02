@@ -16,8 +16,6 @@ spec:
                 - sh
                 - -c
                 - |
-                  # Önce mevcut yedeği sil (varsa)
                   /velero backup delete pvc-backup-prod --confirm
-                  # Sonra yeni yedek oluştur
                   /velero backup create pvc-backup-prod --include-resources=persistentvolumeclaims,persistentvolumes --include-namespaces=staging
           restartPolicy: Never
