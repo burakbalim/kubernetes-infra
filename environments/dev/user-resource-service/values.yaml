@@ -32,17 +32,12 @@ ingress:
   enabled: true
   customNamespace:
     enabled: true
+    domain: "int.wordflashy.com"
   className: "nginx"
-  defaultPath: "/"
+  defaultPath: "/user-resource-service"
   defaultPathType: "Prefix"
   annotations: {}
-  hosts:
-    - host: "testwordflashy.com"
-      paths:
-        - path: /user-resource-service
-          pathType: Prefix
   tls: []
-
 
 nameOverride: "user-resource-service"
 fullnameOverride: "user-resource-service"

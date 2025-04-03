@@ -31,25 +31,19 @@ service:
 ingress:
   enabled: true
   customNamespace:
-    enabled: false
+    enabled: true
+    domain: "int.wordflashy.com"
   className: "nginx"
-  defaultPath: "/"
+  defaultPath: "/word-flashy-service"
   defaultPathType: "Prefix"
   annotations: {}
-  hosts:
-    - host: "testwordflashy.com"
-      paths:
-        - path: /word-flashy-service
-          pathType: Prefix
   tls: []
 
 
 nameOverride: "word-flashy-service"
 fullnameOverride: "word-flashy-service"
 
-podAnnotations:
-  kubectl.kubernetes.io/restartedAt: {{ now | quote }}
-
+podAnnotations: {}
 podLabels: {}
 podSecurityContext: {}
 securityContext: {}
