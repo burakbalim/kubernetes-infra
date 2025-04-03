@@ -38,7 +38,7 @@ spec:
   {{- end }}
   rules:
     {{- if .Values.ingress.customNamespace.enabled }}
-    - host: {{ printf "api-%s.%s" .Release.Namespace .Values.customNamespace.domain | quote }}
+    - host: {{ printf "api-%s.%s" .Release.Namespace .Values.ingress.customNamespace.domain | quote }}
       http:
         paths:
           - path: {{ .Values.ingress.defaultPath | default "/" }}
