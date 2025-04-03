@@ -42,9 +42,7 @@ ingress:
 nameOverride: "api-gw"
 fullnameOverride: "api-gw"
 
-podAnnotations:
-  kubectl.kubernetes.io/restartedAt: {{ now | quote }}
-
+podAnnotations: {}
 podLabels: {}
 podSecurityContext: {}
 securityContext: {}
