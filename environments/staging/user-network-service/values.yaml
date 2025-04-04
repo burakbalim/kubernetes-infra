@@ -39,7 +39,7 @@ ingress:
   hosts:
     - host: "api.staging.int.wordflashy.com"
       paths:
-        - path: /word-flashy-service
+        - path: /user-network-service
           pathType: Prefix
   tls: []
 
