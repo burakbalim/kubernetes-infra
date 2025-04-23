@@ -1,14 +1,10 @@
 replicaCount: 1
 
 image:
-  repository: ghcr.io/burakbalim/word-flashy-service
+  repository: ghcr.io/burakbalim/word-flashy-ui
   pullPolicy: Always
   tag: latest
   pullSecret: ghcr-secret
-
-env:
-  - name: "JAVA_OPTS"
-    value: "-Dspring.profiles.active=test"
 
 configs:
   - service-test-config
@@ -20,32 +16,35 @@ serviceAccount:
   create: true
   automount: false
   annotations: {}
-  name: "user-network-service"
+  name: "word-flashy-ui"
 
 service:
-  fullname: "user-network-service"
+  fullname: "word-flashy-ui"
   type: ClusterIP
   port: 80
-  serviceAccountName: "user-network-service"
+  serviceAccountName: "word-flashy-ui"
 
 ingress:
   enabled: true
   customNamespace:
     enabled: false
   className: "nginx"
-  defaultPath: "/user-network-service"
+  defaultPath: "/"
   defaultPathType: "Prefix"
   annotations: {}
   hosts:
-    - host: "api.staging.int.wordflashy.com"
+    - host: "staging.wordflashy.com"
       paths:
-        - path: /user-network-service
+        - path: /
           pathType: Prefix
-  tls: []
+  tls:
+    - hosts:
+        - "staging.wordflashy.com"
+      secretName: staging-ui-tls
 
 
-nameOverride: "user-network-service"
-fullnameOverride: "user-network-service"
+nameOverride: "word-flashy-ui"
+fullnameOverride: "word-flashy-ui"
 
 podAnnotations: {}
 podLabels: {}
