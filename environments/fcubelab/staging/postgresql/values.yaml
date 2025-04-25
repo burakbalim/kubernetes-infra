@@ -10,6 +10,7 @@ service:
   type: ClusterIP
 
 storage:
+  useExistingClaim: false
   storageClass: local-storage-retain
   size: "20Gi"
 
