@@ -11,7 +11,7 @@ service:
 
 storage:
   useExistingClaim: false
-  storageClass: local-storage-delete
+  storageClass: local-storage-retain
   size: "20Gi"
 
 postgresqlConfig:
