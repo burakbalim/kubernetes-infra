@@ -1,0 +1,69 @@
+replicaCount: 1
+
+image:
+  repository: ghcr.io/burakbalim/api-gw
+  pullPolicy: Always
+  tag: latest
+  pullSecret: ghcr-secret
+
+env:
+  - name: "JAVA_OPTS"
+    value: "-Dspring.profiles.active=test --enable-preview"
+
+configs:
+  - service-test-config
+
+secrets:
+  - service-test-secret
+
+serviceAccount:
+  create: true
+  automount: false
+  annotations: {}
+  name: "helm-deployer"
+
+service:
+  fullname: "api-gw"
+  type: ClusterIP
+  port: 80
+  serviceAccountName: "helm-deployer"
+
+ingress:
+  enabled: true
+  customNamespace:
+    enabled: false
+  className: "nginx"
+  defaultPath: "/"
+  defaultPathType: "Prefix"
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-staging
+  hosts:
+    - host: "apigw.staging.fcubelab.com"
+      paths:
+        - path: /gw
+          pathType: Prefix
+  tls:
+    - hosts:
+        - "apigw.staging.fcubelab.com"
+      secretName: apigw-staging-fcubelab-tls
+
+nameOverride: "api-gw"
+fullnameOverride: "api-gw"
+
+podAnnotations: {}
+podLabels: {}
+podSecurityContext: {}
+securityContext: {}
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 3
+  targetCPUUtilizationPercentage: 80
+
+resources: {}
+volumes: []
+volumeMounts: []
+nodeSelector: {}
+tolerations: []
+affinity: {}
