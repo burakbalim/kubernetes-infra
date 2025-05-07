@@ -11,4 +11,5 @@ data:
   REDIS_PORT: {{ .Values.config.REDIS_PORT | quote }}
   MONGO_HOST: {{ .Values.config.MONGO_HOST | quote }}
   MOUNTED_DIRECTORY: {{ .Values.config.MOUNTED_DIRECTORY | quote }}
+  DOMAIN: {{ .Values.config.DOMAIN | quote }}
 
