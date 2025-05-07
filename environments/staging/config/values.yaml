@@ -5,4 +5,4 @@ config:
   REDIS_HOST: ""
   REDIS_PORT: ""
   MONGO_HOST: ""
-  MOUNTED_DIRECTORY: "/var/lib/api-gw/configuration/application/"
+  DOMAIN: "staging.wordflashy.com"
