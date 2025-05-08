@@ -9,7 +9,7 @@ data:
   NOTIFICATION_SERVICE_URL: "notification-service.{{ .Release.Namespace }}.svc.cluster.local"
   OAUTH_USER_RESOURCE_URL: "user-resource-service.{{ .Release.Namespace }}.svc.cluster.local"
   POSTGRES_POOL_SIZE: {{ .Values.config.POSTGRES_POOL_SIZE | quote }}
-  REDIS_HOST: "redis-master".{{ .Release.Namespace }}.svc.cluster.local
+  REDIS_HOST: "redis-master.{{ .Release.Namespace }}.svc.cluster.local"
   REDIS_PORT: "6379"
   MOUNTED_DIRECTORY: {{ .Values.config.MOUNTED_DIRECTORY | quote }}
   DOMAIN: {{ .Values.config.DOMAIN | quote }}
