@@ -6,10 +6,14 @@ image:
   tag: latest
   pullSecret: ghcr-secret
 
+
 env:
-  apiGatewayUrl: "/api"
-  appEnv: "test"
-  appVersion: "1.0.0"
+  - name: "apiGatewayUrl"
+    value: "/api"
+  - name: "appEnv"
+    value: "test"
+  - name: "appVersion"
+    value: "1.0.0"
 
 configs:
   - service-test-config
