@@ -6,13 +6,12 @@ image:
   tag: latest
   pullSecret: ghcr-secret
 
-
 env:
-  - name: "apiGatewayUrl"
+  - name: "API_GATEWAY_URL"
     value: "/api"
-  - name: "appEnv"
+  - name: "APP_ENV"
     value: "test"
-  - name: "appVersion"
+  - name: "APP_VERSION"
     value: "1.0.0"
 
 configs:
