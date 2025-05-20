@@ -1,0 +1,65 @@
+replicaCount: 1
+
+image:
+  repository: ghcr.io/burakbalim/word-flashy-portal
+  pullPolicy: Always
+  tag: latest
+  pullSecret: ghcr-secret
+
+configs:
+  - portal-config
+
+secrets:
+  - portal-secret
+
+serviceAccount:
+  create: true
+  automount: false
+  annotations: {}
+  name: "word-flashy-portal"
+
+service:
+  fullname: "word-flashy-portal"
+  type: ClusterIP
+  port: 80
+  serviceAccountName: "word-flashy-portal"
+
+ingress:
+  enabled: true
+  customNamespace:
+    enabled: false
+  className: "nginx"
+  defaultPath: "/"
+  defaultPathType: "Prefix"
+  annotations: {}
+  hosts:
+    - host: "crm.staging.wordflashy.com"
+      paths:
+        - path: /
+          pathType: Prefix
+  tls:
+    - hosts:
+        - "crm.staging.wordflashy.com"
+      secretName: staging-portal-tls
+
+
+nameOverride: "word-flashy-portal"
+fullnameOverride: "word-flashy-portal"
+
+podAnnotations: {}
+podLabels: {}
+podSecurityContext: {}
+securityContext: {}
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 4
+  targetCPUUtilizationPercentage: 80
+
+resources: {}
+volumes: []
+volumeMounts: []
+nodeSelector: {}
+tolerations: []
+affinity: {}
