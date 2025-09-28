@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: ui-staging-cert
+  namespace: staging
+spec:
+  secretName: staging-ui-tls
+  issuerRef:
+    name: letsencrypt-staging
+    kind: ClusterIssuer
+  commonName: staging.wordflashy.com
+  dnsNames:
+    - staging.wordflashy.com
