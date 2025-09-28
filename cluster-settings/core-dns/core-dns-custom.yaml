@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: coredns-custom
+  namespace: kube-system
+data:
+  default.server: |
+    api.staging.int.wordflashy.com {
+      hosts {
+        x.x.x.x api.staging.int.wordflashy.com
+        fallthrough
+      }
+      forward . /etc/resolv.conf
+      cache
+    }
+    tekton.int.wordflashy.com {
+      hosts {
+        x.x.x.x tekton.int.wordflashy.com
+        fallthrough
+      }
+      forward . /etc/resolv.conf
+      cache
+    }
+    api.staging.int.fcubelab.com {
+          hosts {
+            31.59.131.47 api.staging.int.fcubelab.com
+            fallthrough
+          }
+          forward . /etc/resolv.conf
+          cache
+    }
