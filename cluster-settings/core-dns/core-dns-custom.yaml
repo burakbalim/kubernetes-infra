@@ -29,3 +29,11 @@ data:
           forward . /etc/resolv.conf
           cache
     }
+    api.staging.int.getspeakhub.com {
+          hosts {
+            31.59.131.47 api.staging.int.getspeakhub.com
+            fallthrough
+          }
+          forward . /etc/resolv.conf
+          cache
+    }
