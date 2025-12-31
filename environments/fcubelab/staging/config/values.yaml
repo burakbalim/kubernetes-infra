@@ -1,6 +1,0 @@
-fullnameOverride: "service-test"
-
-config:
-  POSTGRES_POOL_SIZE: 10
-  DOMAIN: "staging.fcubelab.com"
-  MOUNTED_DIRECTORY: ""
