@@ -54,6 +54,7 @@ docker-compose.override.yml
 # Kubernetes specific files
 *.yaml
 *.yml
+*.env
 
 # Other
 *.swp

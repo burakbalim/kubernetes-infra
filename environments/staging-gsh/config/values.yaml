@@ -1,0 +1,7 @@
+fullnameOverride: "service-test"
+
+config:
+  POSTGRES_POOL_SIZE: 10
+  DOMAIN: "staging.getspeakhub.com"
+  MOUNTED_DIRECTORY: ""
+A
