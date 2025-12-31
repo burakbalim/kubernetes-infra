@@ -10,7 +10,7 @@ service:
   type: ClusterIP
 
 storage:
-  storageClass: local-storage-retain
+  storageClass: local-storage-delete
   size: "20Gi"
 
 postgresqlConfig:
