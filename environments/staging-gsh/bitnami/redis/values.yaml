@@ -1,0 +1,17 @@
+architecture: replication
+auth:
+  enabled: true
+  password: "my-secure-password"
+master:
+  persistence:
+    enabled: true
+    size: 2Gi
+  resources:
+    requests:
+      memory: 1Gi
+      cpu: 500m
+replica:
+  replicaCount: 1
+  persistence:
+    enabled: true
+    size: 1Gi
