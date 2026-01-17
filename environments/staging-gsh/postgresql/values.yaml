@@ -3,8 +3,8 @@ replicas: 1
 fullnameOverride: "postgres"
 
 image:
-  repository: postgres
-  tag: "15"
+  repository: postgis/postgis
+  tag: "15-3.3"
 
 service:
   type: ClusterIP
