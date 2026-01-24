@@ -19,7 +19,7 @@ configs:
   - service-config
 
 secrets:
-  - service-test-secret
+  - platform-shared-secret
 
 ingress:
   enabled: true
