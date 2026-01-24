@@ -1,3 +1,5 @@
+serviceType: apigw
+
 replicaCount: 1
 
 image:
@@ -17,8 +19,11 @@ secrets:
   - service-test-secret
 
 ingress:
-  - name: external-ingress
-    path: "/gw"
+  enabled: true
+  items:
+    - external-ingress
+
+ingress_path: "/gw"
 
 serviceAccount:
   create: true
@@ -36,7 +41,8 @@ nameOverride: "api-gw"
 fullnameOverride: "api-gw"
 
 podAnnotations: {}
-podLabels: {}
+podLabels:
+  app.type: api
 podSecurityContext: {}
 securityContext: {}
 

@@ -1,3 +1,5 @@
+serviceType: app
+
 replicaCount: 1
 
 image:
@@ -21,8 +23,11 @@ secrets:
   - service-test-secret
 
 ingress:
-  - name: external-ingress
-    path: "/"
+  enabled: true
+  items:
+    - external-ingress
+
+ingress_path: "/"
 
 serviceAccount:
   create: true
@@ -40,7 +45,8 @@ nameOverride: "getspeakhub-ui"
 fullnameOverride: "getspeakhub-ui"
 
 podAnnotations: {}
-podLabels: {}
+podLabels:
+  app.type: frontend
 podSecurityContext: {}
 securityContext: {}
 

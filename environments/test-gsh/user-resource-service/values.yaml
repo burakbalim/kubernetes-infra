@@ -1,3 +1,5 @@
+serviceType: api
+
 replicaCount: 1
 
 image:
@@ -17,8 +19,11 @@ secrets:
   - service-test-secret
 
 ingress:
-  - name: internal-ingress
-    path: "/notification-service"
+  enabled: true
+  items:
+    - internal-ingress
+
+ingress_path: "/notification-service"
 
 serviceAccount:
   create: true
@@ -37,7 +42,8 @@ nameOverride: "user-resource-service"
 fullnameOverride: "user-resource-service"
 
 podAnnotations: {}
-podLabels: {}
+podLabels:
+  app.type: api
 podSecurityContext: {}
 securityContext: {}
 

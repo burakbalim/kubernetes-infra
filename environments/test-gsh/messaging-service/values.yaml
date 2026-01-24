@@ -1,3 +1,5 @@
+serviceType: api
+
 replicaCount: 1
 
 image:
@@ -17,8 +19,11 @@ secrets:
   - service-test-secret
 
 ingress:
-  - name: internal-ingress
-    path: "/messaging-service"
+  enabled: true
+  items:
+    - internal-ingress
+
+ingress_path: "/messaging-service"
 
 serviceAccount:
   create: true
@@ -36,7 +41,8 @@ nameOverride: "messaging-service"
 fullnameOverride: "messaging-service"
 
 podAnnotations: {}
-podLabels: {}
+podLabels:
+  app.type: api
 podSecurityContext: {}
 securityContext: {}
 

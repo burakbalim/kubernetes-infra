@@ -1,10 +1,15 @@
 {{- $namespace := .Release.Namespace }}
-  {{- $modeNamespace := .Values.global.mode_namespace | default false }}
-  {{- $catalog := .Values.global.ingressCatalog }}
+{{- $modeNamespace := .Values.global.mode_namespace | default false }}
+{{- $catalog := .Values.global.ingressCatalog }}
+{{- $serviceType := .Values.serviceType | default "" }}
+{{- $ingressList := .Values.ingress }}
+{{- if kindIs "map" .Values.ingress }}
+  {{- $ingressList = .Values.ingress.items }}
+{{- end }}
 
-  {{- range $ingressName := .Values.ingress }}
-  {{- $ingressData := index $catalog $ingressName }}
-  {{- if $ingressData }}
+{{- range $ingressName := $ingressList }}
+{{- $ingressData := index $catalog $ingressName }}
+{{- if $ingressData }}
 
   # --- PATH HESAPLAMA (ÖNEMLİ KISIM) ---
   # Eğer $.Values.ingress_path tanımlıysa onu al, değilse katalogdaki $ingressData.path değerini kullan.
@@ -17,13 +22,20 @@ metadata:
   name: {{ $ingressName }}
   namespace: {{ $namespace }}
   annotations:
-    kubernetes.io/ingress.class: {{ $ingressData.ingressClass }}
+    {{- if $ingressData.tlsEnabled }}
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    {{- end }}
 spec:
+  ingressClassName: {{ $ingressData.ingressClass }}
   {{- if $ingressData.tlsEnabled }}
   tls:
     - hosts:
       {{- if $modeNamespace }}
+      {{- if $serviceType }}
+      - {{ $serviceType }}.{{ $namespace }}.{{ $ingressData.baseDomain }}
+      {{- else }}
       - {{ $namespace }}.{{ $ingressData.baseDomain }}
+      {{- end }}
       {{- else }}
       - {{ $ingressData.domain }}
       {{- end }}
@@ -31,7 +43,11 @@ spec:
   {{- end }}
   rules:
   {{- if $modeNamespace }}
+  {{- if $serviceType }}
+  - host: {{ $serviceType }}.{{ $namespace }}.{{ $ingressData.baseDomain }}
+  {{- else }}
   - host: {{ $namespace }}.{{ $ingressData.baseDomain }}
+  {{- end }}
   {{- else }}
   - host: {{ $ingressData.domain }}
   {{- end }}

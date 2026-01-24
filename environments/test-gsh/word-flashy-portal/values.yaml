@@ -1,3 +1,5 @@
+serviceType: portal
+
 replicaCount: 1
 
 image:
@@ -13,8 +15,11 @@ secrets:
   - portal-secret
 
 ingress:
-  - name: external-ingress
-    path: "/"
+  enabled: true
+  items:
+    - external-ingress
+
+ingress_path: "/"
 
 serviceAccount:
   create: true
@@ -32,7 +37,8 @@ nameOverride: "getspeakhub-portal"
 fullnameOverride: "getspeakhub-portal"
 
 podAnnotations: {}
-podLabels: {}
+podLabels:
+  app.type: frontend
 podSecurityContext: {}
 securityContext: {}
 
