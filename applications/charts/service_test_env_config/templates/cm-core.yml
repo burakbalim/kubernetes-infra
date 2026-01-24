@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "mychart.fullname" . }}-core-config
+  labels:
+    app.kubernetes.io/component: core
+data:
+  DOMAIN: "{{ .Values.global.envPrefix }}.{{ .Values.global.domain }}"
+  API_INTERNAL: "api.{{ .Values.global.envPrefix }}.int.{{ .Values.global.domain }}"
+  JWKS_URL: "apigw.{{ .Values.global.envPrefix }}.{{ .Values.global.domain }}"
+  MOUNTED_DIRECTORY: "{{ .Values.core.mountedDirectory }}"

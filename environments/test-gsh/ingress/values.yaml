@@ -1,0 +1,16 @@
+global:
+  mode_namespace: true
+
+  ingressCatalog:
+    external-ingress:
+      domain: "staging.getspeakhub.com" # Normal mod için
+      baseDomain: "getspeakhub.com"     # Namespace modu için kök
+      tlsEnabled: true
+      ingressClass: "nginx"
+
+    internal-ingress:
+      domain: "staging.getspeakhub.com"
+      baseDomain: "getspeakhub.com"
+      tlsEnabled: false
+      ingressClass: "nginx"
+
