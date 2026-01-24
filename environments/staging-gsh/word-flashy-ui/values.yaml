@@ -1,0 +1,73 @@
+replicaCount: 1
+
+image:
+  repository: ghcr.io/burakbalim/word-flashy-ui
+  pullPolicy: Always
+  tag: latest
+  pullSecret: ghcr-secret
+
+env:
+  - name: "API_GATEWAY_URL"
+    value: "/api"
+  - name: "APP_ENV"
+    value: "test"
+  - name: "APP_VERSION"
+    value: "1.0.0"
+
+configs:
+  - service-test-config
+
+secrets:
+  - service-test-secret
+
+serviceAccount:
+  create: true
+  automount: false
+  annotations: {}
+  name: "word-flashy-ui"
+
+service:
+  fullname: "word-flashy-ui"
+  type: ClusterIP
+  port: 80
+  serviceAccountName: "word-flashy-ui"
+
+ingress:
+  enabled: true
+  customNamespace:
+    enabled: false
+  className: "nginx"
+  defaultPath: "/"
+  defaultPathType: "Prefix"
+  annotations: {}
+  hosts:
+    - host: "staging.getspeakhub.com"
+      paths:
+        - path: /
+          pathType: Prefix
+  tls:
+    - hosts:
+        - "staging.getspeakhub.com"
+      secretName: staging-ui-tls
+
+
+nameOverride: "word-flashy-ui"
+fullnameOverride: "word-flashy-ui"
+
+podAnnotations: {}
+podLabels: {}
+podSecurityContext: {}
+securityContext: {}
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 4
+  targetCPUUtilizationPercentage: 80
+
+resources: {}
+volumes: []
+volumeMounts: []
+nodeSelector: {}
+tolerations: []
+affinity: {}
