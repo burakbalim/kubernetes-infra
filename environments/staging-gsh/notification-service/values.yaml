@@ -37,7 +37,7 @@ ingress:
   defaultPathType: "Prefix"
   annotations: {}
   hosts:
-    - host: "api.staging-gsh.int.getspeakhub.com"
+    - host: "api.staging.int.getspeakhub.com"
       paths:
         - path: /notification-service
           pathType: Prefix

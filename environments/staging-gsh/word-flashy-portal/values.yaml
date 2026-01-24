@@ -33,13 +33,13 @@ ingress:
   defaultPathType: "Prefix"
   annotations: {}
   hosts:
-    - host: "crm.staging-gsh.getspeakhub.com"
+    - host: "crm.staging.getspeakhub.com"
       paths:
         - path: /
           pathType: Prefix
   tls:
     - hosts:
-        - "crm.staging-gsh.getspeakhub.com"
+        - "crm.staging.getspeakhub.com"
       secretName: staging-gsh-portal-tls
 
 
