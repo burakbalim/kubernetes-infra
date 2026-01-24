@@ -19,7 +19,7 @@ configs:
   - service-config
 
 secrets:
-  - platform-shared-secret
+  - db-secret
 
 ingress:
   enabled: true

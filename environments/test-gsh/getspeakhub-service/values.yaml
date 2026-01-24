@@ -1,3 +1,4 @@
+serviceType: api
 replicaCount: 1
 
 image:
@@ -10,11 +11,22 @@ env:
   - name: "JAVA_OPTS"
     value: "-Dspring.profiles.active=test"
 
+
 configs:
-  - service-test-config
+  - auth-config
+  - core-config
+  - db-config
+  - service-config
 
 secrets:
-  - service-test-secret
+  - db-secret
+
+ingress:
+  enabled: true
+  items:
+    - internal-ingress
+
+ingress_path: "/getspeakhub-service"
 
 serviceAccount:
   create: true
@@ -28,27 +40,12 @@ service:
   port: 80
   serviceAccountName: "getspeakhub-service"
 
-ingress:
-  enabled: true
-  customNamespace:
-    enabled: false
-  className: "nginx"
-  defaultPath: "/"
-  defaultPathType: "Prefix"
-  annotations: {}
-  hosts:
-    - host: "api.staging.int.getspeakhub.com"
-      paths:
-        - path: /getspeakhub-service
-          pathType: Prefix
-  tls: []
-
-
 nameOverride: "getspeakhub-service"
 fullnameOverride: "getspeakhub-service"
 
 podAnnotations: {}
-podLabels: {}
+podLabels:
+  app.type: api
 podSecurityContext: {}
 securityContext: {}
 

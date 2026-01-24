@@ -13,17 +13,20 @@ env:
     value: "-Dspring.profiles.active=test"
 
 configs:
-  - service-test-config
+  - auth-config
+  - core-config
+  - db-config
+  - service-config
 
 secrets:
-  - service-test-secret
+  - db-secret
 
 ingress:
   enabled: true
   items:
     - internal-ingress
 
-ingress_path: "/notification-service"
+ingress_path: "/user-resource-service"
 
 serviceAccount:
   create: true

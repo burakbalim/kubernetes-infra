@@ -13,10 +13,13 @@ env:
     value: "-Dspring.profiles.active=test"
 
 configs:
-  - service-test-config
+  - auth-config
+  - core-config
+  - db-config
+  - service-config
 
 secrets:
-  - service-test-secret
+  - db-secret
 
 ingress:
   enabled: true

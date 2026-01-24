@@ -12,16 +12,20 @@ env:
   - name: "JAVA_OPTS"
     value: "-Dspring.profiles.active=test"
 
+
 configs:
-  - service-test-config
+  - auth-config
+  - core-config
+  - db-config
+  - service-config
 
 secrets:
-  - service-test-secret
+  - db-secret
 
 ingress:
   enabled: true
   items:
-    - internal-ingress
+    - external-ingress
 
 ingress_path: "/messaging-service"
 

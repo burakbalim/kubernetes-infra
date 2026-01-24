@@ -16,16 +16,11 @@ env:
   - name: "APP_VERSION"
     value: "1.0.0"
 
-configs:
-  - service-test-config
-
-secrets:
-  - service-test-secret
 
 ingress:
   enabled: true
   items:
-    - external-ingress
+    - internal-ingress
 
 ingress_path: "/"
 

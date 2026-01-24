@@ -8,16 +8,10 @@ image:
   tag: latest
   pullSecret: ghcr-secret
 
-configs:
-  - portal-config
-
-secrets:
-  - portal-secret
-
 ingress:
   enabled: true
   items:
-    - external-ingress
+    - internal-ingress
 
 ingress_path: "/"
 
