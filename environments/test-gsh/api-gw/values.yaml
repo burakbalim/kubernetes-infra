@@ -13,7 +13,10 @@ env:
     value: "-Dspring.profiles.active=test --enable-preview"
 
 configs:
-  - service-test-config
+  - cm-auth
+  - cm-core
+  - cm-database
+  - cm-service
 
 secrets:
   - service-test-secret

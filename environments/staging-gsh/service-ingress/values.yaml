@@ -1,0 +1,20 @@
+global:
+  ingressCatalog:
+    external-ingress:
+      domain: "staging.getspeakhub.com" # Normal mod için
+      baseDomain: "getspeakhub.com"     # Namespace modu için kök
+      tlsEnabled: true
+      ingressClass: "nginx"
+
+    internal-ingress:
+      domain: "staging.getspeakhub.com"
+      baseDomain: "int.getspeakhub.com"
+      tlsEnabled: false
+      ingressClass: "nginx"
+
+service:
+  port: 80
+  type: ClusterIP
+
+ingress:
+  enabled: false
