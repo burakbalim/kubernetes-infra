@@ -10,7 +10,7 @@ global:
 
     internal-ingress:
       domain: "staging.getspeakhub.com"
-      baseDomain: "getspeakhub.com"
+      baseDomain: "int.getspeakhub.com"
       tlsEnabled: false
       ingressClass: "nginx"
 

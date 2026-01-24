@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ include "mychart.fullname" . }}-core-config
+  name: core-config
   labels:
     app.kubernetes.io/component: core
 data:

@@ -9,12 +9,11 @@ metadata:
   name: {{ $ingressName }}
   namespace: {{ $namespace }}
   annotations:
-    kubernetes.io/ingress.class: {{ $ingressData.ingressClass }}
-    # Eğer TLS için cert-manager kullanıyorsanız:
     {{- if $ingressData.tlsEnabled }}
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
     {{- end }}
 spec:
+  ingressClassName: {{ $ingressData.ingressClass }}
   {{- if $ingressData.tlsEnabled }}
   tls:
     - hosts:
