@@ -1,0 +1,49 @@
+{{- $namespace := .Release.Namespace }}
+  {{- $modeNamespace := .Values.global.mode_namespace | default false }}
+  {{- $catalog := .Values.global.ingressCatalog }}
+
+  {{- range $ingressName := .Values.ingress }}
+  {{- $ingressData := index $catalog $ingressName }}
+  {{- if $ingressData }}
+
+  # --- PATH HESAPLAMA (ÖNEMLİ KISIM) ---
+  # Eğer $.Values.ingress_path tanımlıysa onu al, değilse katalogdaki $ingressData.path değerini kullan.
+  {{- $finalPath := $.Values.ingress_path | default $ingressData.path }}
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ $ingressName }}
+  namespace: {{ $namespace }}
+  annotations:
+    kubernetes.io/ingress.class: {{ $ingressData.ingressClass }}
+spec:
+  {{- if $ingressData.tlsEnabled }}
+  tls:
+    - hosts:
+      {{- if $modeNamespace }}
+      - {{ $namespace }}.{{ $ingressData.baseDomain }}
+      {{- else }}
+      - {{ $ingressData.domain }}
+      {{- end }}
+      secretName: {{ $ingressName }}-tls
+  {{- end }}
+  rules:
+  {{- if $modeNamespace }}
+  - host: {{ $namespace }}.{{ $ingressData.baseDomain }}
+  {{- else }}
+  - host: {{ $ingressData.domain }}
+  {{- end }}
+  http:
+    paths:
+      # --- HESAPLANAN PATH BURAYA GELİYOR ---
+      - path: {{ $finalPath }}
+        pathType: Prefix
+        backend:
+          service:
+            name: {{ $.Release.Name }}-service
+            port:
+              number: 80
+  {{- end }}
+  {{- end }}
