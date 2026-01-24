@@ -1,32 +1,11 @@
 apiVersion: v1
 entries:
-  elasticsearch:
-  - apiVersion: v2
-    created: "2026-01-24T18:35:07.564477+03:00"
-    description: A Helm chart for deploying Elasticsearch on Kubernetes
-    digest: e0cdedd6301c51b1af91f0459ef68e36eb691354171fee16aa9a2179d68e88dd
-    name: elasticsearch
-    type: application
-    urls:
-    - https://burakbalim.github.io/kubernetes-infra/helm-packages/elasticsearch-0.1.0.tgz
-    version: 0.1.0
-  logstash:
-  - apiVersion: v2
-    appVersion: 7.15.0
-    created: "2026-01-24T18:35:07.564588+03:00"
-    description: A Helm chart for Logstash
-    digest: 59919293e9f7bcfd3206717929bba515783dd58ffb50d8713ab3bea3db4cb26e
-    name: logstash
-    type: application
-    urls:
-    - https://burakbalim.github.io/kubernetes-infra/helm-packages/logstash-0.1.0.tgz
-    version: 0.1.0
   postgresql:
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2026-01-24T18:35:07.564691+03:00"
+    created: "2026-01-24T18:37:56.393685+03:00"
     description: A Helm chart for Kubernetes
-    digest: d81b55460b93168d948d6754f3f614915aa739aafd58acb9126a35fcff885fe8
+    digest: 4bc2fb3eadcb9fc46ef667ecb04e26bcbcc85ae7de7e39f5aa7e3637f06e2005
     name: postgresql
     type: application
     urls:
@@ -35,33 +14,23 @@ entries:
   postgresql-slave:
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2026-01-24T18:35:07.564796+03:00"
+    created: "2026-01-24T18:37:56.393788+03:00"
     description: A Helm chart for Kubernetes
-    digest: 2ffc1baa6e224d8dc5f4fdc08be880e057a4de8f2a0df0dd496ec7f12281c042
+    digest: 5642c2162c0b431cf74cb8d436d9aa6a49d46b5ba29f2b0b81873c6065c85076
     name: postgresql-slave
     type: application
     urls:
     - https://burakbalim.github.io/kubernetes-infra/helm-packages/postgresql-slave-0.1.0.tgz
     version: 0.1.0
-  prometheus:
-  - apiVersion: v2
-    appVersion: latest
-    created: "2026-01-24T18:35:07.564888+03:00"
-    description: A Helm chart for Prometheus deployment
-    digest: 02d98647691f98dd0502787d620813d5392a78f5e03eae8d648ba9e473f7c3c3
-    name: prometheus
-    urls:
-    - https://burakbalim.github.io/kubernetes-infra/helm-packages/prometheus-1.0.0.tgz
-    version: 1.0.0
   service:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2026-01-24T18:35:07.565017+03:00"
+    created: "2026-01-24T18:37:56.393919+03:00"
     description: A Helm chart for Kubernetes
-    digest: 491dee2461e0d1b702d416ffb7c9f5e31fa4b36c0f13611852da9f65fb1aa17e
+    digest: e57cd73120e4203172b160c6c7694ab8034593b6accbdfefa03e96ca18de5e96
     name: service
     type: application
     urls:
     - https://burakbalim.github.io/kubernetes-infra/helm-packages/service-0.1.0.tgz
     version: 0.1.0
-generated: "2026-01-24T18:35:07.563737+03:00"
+generated: "2026-01-24T18:37:56.39348+03:00"
