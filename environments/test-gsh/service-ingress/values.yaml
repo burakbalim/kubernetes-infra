@@ -1,6 +1,4 @@
 global:
-  mode_namespace: true
-
   ingressCatalog:
     external-ingress:
       domain: "staging.getspeakhub.com" # Normal mod için
