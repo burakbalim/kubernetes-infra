@@ -16,7 +16,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ $ingressName }}
+  name: {{ $.Release.Name }}-{{ $ingressName }}
   namespace: {{ $namespace }}
   annotations:
     {{- if $ingressData.tlsEnabled }}
