@@ -14,3 +14,9 @@ global:
       tlsEnabled: false
       ingressClass: "nginx"
 
+service:
+  port: 80
+  type: ClusterIP
+
+ingress:
+  enabled: false

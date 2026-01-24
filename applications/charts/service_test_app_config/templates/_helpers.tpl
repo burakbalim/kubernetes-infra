@@ -10,3 +10,7 @@
 {{- end }}
 {{- end }}
 {{- end }}
+
+{{- define "mychart.fullname" -}}
+{{- include "config.fullname" . }}
+{{- end }}

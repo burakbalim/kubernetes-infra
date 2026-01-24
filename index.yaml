@@ -3,9 +3,9 @@ entries:
   postgresql:
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2026-01-24T19:49:01.250435+03:00"
+    created: "2026-01-24T20:31:28.28018+03:00"
     description: A Helm chart for Kubernetes
-    digest: a8b354f9f88afbf85cf0f1e8a8318a5de18d798559aa36ac438c2429aae8c2cd
+    digest: 5a8a0adede3addb66f96a7d116451ac99d4c1a54cd7a68c6a11c685ae3e94709
     name: postgresql
     type: application
     urls:
@@ -14,9 +14,9 @@ entries:
   postgresql-slave:
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2026-01-24T19:49:01.250545+03:00"
+    created: "2026-01-24T20:31:28.280285+03:00"
     description: A Helm chart for Kubernetes
-    digest: f8f2aade0d3ded636b341dfaf5750729b8b069306638ee8b3620f5e3f8d3134a
+    digest: 1ae9b593e31848a241383d1ad2e893eaac18fc4ce640b9f5d465347aa34d8b51
     name: postgresql-slave
     type: application
     urls:
@@ -25,9 +25,9 @@ entries:
   service:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2026-01-24T19:49:01.25068+03:00"
+    created: "2026-01-24T20:31:28.280422+03:00"
     description: A Helm chart for Kubernetes
-    digest: 108343187049c23a487ac84b4664e5eb29469291f10ee05fdcfe8825de39c6bc
+    digest: 44fc6ff2f50597fab6552c4a673c95b81dfbbf2ae9c6598c1378e50c46a0b179
     name: service
     type: application
     urls:
@@ -36,9 +36,9 @@ entries:
   service-1:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2026-01-24T19:49:01.250818+03:00"
+    created: "2026-01-24T20:31:28.280557+03:00"
     description: A Helm chart for Kubernetes
-    digest: a0964ad3cfd2090d1d9181e5a4dc13b831935b572dedaf160ed12c0823971787
+    digest: 61b14b449f6b20b6c07e9e06f664e0dcbf0fd1442275c0bbf728c0f0ae78ec7a
     name: service-1
     type: application
     urls:
@@ -47,9 +47,9 @@ entries:
   service-config:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2026-01-24T19:49:01.25091+03:00"
+    created: "2026-01-24T20:31:28.280663+03:00"
     description: A Helm chart for Kubernetes
-    digest: 5431bf415ace68db3fb73580e1a73de6ea2c92cde17a32d7fa95fe7b380d956d
+    digest: e71c905940df076ce54c9281df1232fe353b18b43ab8347abc63aad193772ad9
     name: service-config
     type: application
     urls:
@@ -58,12 +58,12 @@ entries:
   service-ingress:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2026-01-24T19:49:01.251015+03:00"
+    created: "2026-01-24T20:31:28.280877+03:00"
     description: A Helm chart for Kubernetes
-    digest: b0cee56f9f8b8eeaccf1430e5cf9f7c4a7dbccb9106f472746cf05c83fae2823
+    digest: e30b3f405664bcd42a796270acd01605c8f56fab7cf4f6c4bb9b012e641f4051
     name: service-ingress
     type: application
     urls:
     - https://burakbalim.github.io/kubernetes-infra/helm-packages/service-ingress-0.1.0.tgz
     version: 0.1.0
-generated: "2026-01-24T19:49:01.249859+03:00"
+generated: "2026-01-24T20:31:28.279956+03:00"

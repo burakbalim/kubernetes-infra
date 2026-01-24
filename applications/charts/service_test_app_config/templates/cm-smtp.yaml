@@ -6,5 +6,5 @@ metadata:
     app.kubernetes.io/component: smtp
 data:
   SMTP_MAIL_URL: "{{ .Values.smtp.url }}"
-  SMTP_MAIL_PORT: "{{ .Values.smtp.port | quote }}"
+  SMTP_MAIL_PORT: {{ .Values.smtp.port | quote }}
   SMTP_USERNAME: "{{ .Values.smtp.username }}"
