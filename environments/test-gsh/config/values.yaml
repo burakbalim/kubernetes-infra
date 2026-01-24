@@ -1,0 +1,29 @@
+global:
+  domain: getspeakhub.com
+  envPrefix: staging-gsh
+  clusterDomain: svc.cluster.local
+
+core:
+  mountedDirectory: ""
+
+databases:
+  mongoServiceName: mongo
+  postgresServiceName: postgres
+  postgresPort: 5432
+  redisServiceName: redis
+  redisPort: 6379
+
+services:
+  notificationName: notification-service
+  oauthResourceName: user-resource-service
+  logstashName: logstash
+
+auth:
+  facebookEnabled: "false"
+  googleEnabled: "false"
+  googleAdminClientId: ""
+
+smtp:
+  url: smtp.gmail.com
+  port: 587
+  username: noreply@wordflashy.com
