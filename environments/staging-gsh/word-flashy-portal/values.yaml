@@ -1,51 +1,50 @@
 replicaCount: 1
 
 image:
-  repository: ghcr.io/burakbalim/notification-service
+  repository: ghcr.io/burakbalim/word-flashy-portal
   pullPolicy: Always
   tag: latest
   pullSecret: ghcr-secret
 
-env:
-  - name: "JAVA_OPTS"
-    value: "-Dspring.profiles.active=test"
-
 configs:
-  - service-test-config
+  - portal-config
 
 secrets:
-  - service-test-secret
+  - portal-secret
 
 serviceAccount:
   create: true
   automount: false
   annotations: {}
-  name: "notification-service"
+  name: "word-flashy-portal"
 
 service:
-  fullname: "notification-service"
+  fullname: "word-flashy-portal"
   type: ClusterIP
   port: 80
-  serviceAccountName: "notification-service"
+  serviceAccountName: "word-flashy-portal"
 
 ingress:
   enabled: true
   customNamespace:
     enabled: false
   className: "nginx"
-  defaultPath: "/notification-service"
+  defaultPath: "/"
   defaultPathType: "Prefix"
   annotations: {}
   hosts:
-    - host: "api.staging-gsh.int.getspeakhub.com"
+    - host: "crm.staging-gsh.getspeakhub.com"
       paths:
-        - path: /notification-service
+        - path: /
           pathType: Prefix
-  tls: []
+  tls:
+    - hosts:
+        - "crm.staging-gsh.getspeakhub.com"
+      secretName: staging-gsh-portal-tls
 
 
-nameOverride: "notification-service"
-fullnameOverride: "notification-service"
+nameOverride: "word-flashy-portal"
+fullnameOverride: "word-flashy-portal"
 
 podAnnotations: {}
 podLabels: {}

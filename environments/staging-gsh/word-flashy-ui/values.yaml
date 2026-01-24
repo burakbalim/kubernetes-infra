@@ -1,14 +1,18 @@
 replicaCount: 1
 
 image:
-  repository: ghcr.io/burakbalim/notification-service
+  repository: ghcr.io/burakbalim/word-flashy-ui
   pullPolicy: Always
   tag: latest
   pullSecret: ghcr-secret
 
 env:
-  - name: "JAVA_OPTS"
-    value: "-Dspring.profiles.active=test"
+  - name: "API_GATEWAY_URL"
+    value: "/api"
+  - name: "APP_ENV"
+    value: "test"
+  - name: "APP_VERSION"
+    value: "1.0.0"
 
 configs:
   - service-test-config
@@ -20,32 +24,35 @@ serviceAccount:
   create: true
   automount: false
   annotations: {}
-  name: "notification-service"
+  name: "word-flashy-ui"
 
 service:
-  fullname: "notification-service"
+  fullname: "word-flashy-ui"
   type: ClusterIP
   port: 80
-  serviceAccountName: "notification-service"
+  serviceAccountName: "word-flashy-ui"
 
 ingress:
   enabled: true
   customNamespace:
     enabled: false
   className: "nginx"
-  defaultPath: "/notification-service"
+  defaultPath: "/"
   defaultPathType: "Prefix"
   annotations: {}
   hosts:
-    - host: "api.staging-gsh.int.getspeakhub.com"
+    - host: "staging-gsh.getspeakhub.com"
       paths:
-        - path: /notification-service
+        - path: /
           pathType: Prefix
-  tls: []
+  tls:
+    - hosts:
+        - "staging-gsh.getspeakhub.com"
+      secretName: staging-ui-tls
 
 
-nameOverride: "notification-service"
-fullnameOverride: "notification-service"
+nameOverride: "word-flashy-ui"
+fullnameOverride: "word-flashy-ui"
 
 podAnnotations: {}
 podLabels: {}
