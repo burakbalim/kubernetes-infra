@@ -1,4 +1,5 @@
 {{- $namespace := .Release.Namespace }}
+{{- $catalog := .Values.global.ingressCatalog }}
 {{- $serviceType := .Values.serviceType | default "" }}
 {{- $ingressList := .Values.ingress }}
 {{- if kindIs "map" .Values.ingress }}
@@ -6,7 +7,7 @@
 {{- end }}
 
 {{- range $ingressName := $ingressList }}
-{{- $ingressData := index $ingressName }}
+{{- $ingressData := index $catalog $ingressName }}
 {{- if $ingressData }}
 
   {{- $finalPath := $.Values.ingress_path | default $ingressData.path }}
