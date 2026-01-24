@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: service-config
+  labels:
+    app.kubernetes.io/component: service
+data:
+  NOTIFICATION_SERVICE_NAME: "{{ .Values.services.notificationName }}.{{ .Release.Namespace }}.{{ .Values.global.clusterDomain }}"
+  OAUTH_RESOURCE_SERVICE_NAME: "{{ .Values.services.oauthResourceName }}.{{ .Release.Namespace }}.{{ .Values.global.clusterDomain }}"
+  LOGSTASH_SERVICE_NAME: "{{ .Values.services.logstashName }}.{{ .Release.Namespace }}.{{ .Values.global.clusterDomain }}"

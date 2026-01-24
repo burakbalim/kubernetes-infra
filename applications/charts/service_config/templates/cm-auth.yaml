@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: auth-config
+  labels:
+    app.kubernetes.io/component: auth
+data:
+  FACEBOOK_CLIENT_ENABLED: "{{ .Values.auth.facebookEnabled }}"
+  GOOGLE_CLIENT_ENABLED: "{{ .Values.auth.googleEnabled }}"
+  GOOGLE_ADMIN_CLIENT_ID: "{{ .Values.auth.googleAdminClientId }}"
