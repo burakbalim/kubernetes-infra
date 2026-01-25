@@ -17,6 +17,7 @@ configs:
   - core-config
   - db-config
   - service-config
+  - gateway-config
 
 secrets:
   - db-secret

@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gateway-config
+  labels:
+    app.kubernetes.io/component: core
+data:
+  LOGSTASH_HOST: "logstash.{{ .Release.Namespace }}.svc.cluster.local"
+  OAUTH_USER_RESOURCE_URL: "user-resource-service.{{ .Release.Namespace }}.svc.cluster.local"
+  MOUNTED_DIRECTORY: "{{ .Values.gateway.mountedDirectory }}"

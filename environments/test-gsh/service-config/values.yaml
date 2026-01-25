@@ -27,3 +27,6 @@ smtp:
   url: smtp.gmail.com
   port: 587
   username: noreply@wordflashy.com
+
+gateway:
+  mountedDirectory: ""
