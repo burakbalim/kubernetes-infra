@@ -5,7 +5,7 @@ metadata:
   labels:
     app.kubernetes.io/component: smtp
 data:
-  SMTP_MAIL_URL: "{{ .Values.email.smtp.url }}"
-  SMTP_MAIL_PORT: {{ .Values.email.smtp.port | quote }}
-  SMTP_USERNAME: "{{ .Values.email.smtp.username }}"
-  EMAIL_TEMPLATE_DIRECTORY: "{{ .Values.email.emailDirectory }}"
+  SMTP_MAIL_URL: "{{ .Values.notification.smtp.url }}"
+  SMTP_MAIL_PORT: {{ .Values.notification.smtp.port | quote }}
+  SMTP_USERNAME: "{{ .Values.notification.smtp.username }}"
+  EMAIL_TEMPLATE_DIRECTORY: "{{ .Values.notification.emailDirectory }}"
