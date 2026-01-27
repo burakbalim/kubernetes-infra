@@ -20,7 +20,7 @@ env:
 ingress:
   enabled: true
   items:
-    - internal-ingress
+    - external-ingress
 
 ingress_path: "/"
 
