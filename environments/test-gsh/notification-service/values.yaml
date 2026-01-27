@@ -15,6 +15,7 @@ configs:
   - core-config
   - db-config
   - service-config
+  - smtp-config
 
 secrets:
   - db-secret
