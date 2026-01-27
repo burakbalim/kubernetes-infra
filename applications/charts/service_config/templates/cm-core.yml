@@ -6,5 +6,7 @@ metadata:
     app.kubernetes.io/component: core
 data:
   DOMAIN: "{{ .Values.global.envPrefix }}.{{ .Values.global.domain }}"
+  PROD_DOMAIN: "{{ .Values.global.domain }}"
   API_INTERNAL: "api.{{ .Values.global.envPrefix }}.int.{{ .Values.global.domain }}"
+  API_GW: "apigw.{{ .Values.global.envPrefix }}.int.{{ .Values.global.domain }}"
   JWKS_URL: "apigw.{{ .Values.global.envPrefix }}.{{ .Values.global.domain }}"
