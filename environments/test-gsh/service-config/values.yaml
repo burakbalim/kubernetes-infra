@@ -23,10 +23,12 @@ auth:
   googleEnabled: "false"
   googleAdminClientId: ""
 
-smtp:
-  url: smtp.resend.com
-  port: 465
-  username: resend
+notification:
+  emailDirectory: templates/email/getspeakhub/
+  smtp:
+    url: smtp.resend.com
+    port: 465
+    username: resend
 
 gateway:
   mountedDirectory: ""
