@@ -27,7 +27,7 @@ ingress:
   items:
     - external-ingress
 
-ingress_path: "/gw"
+ingress_path: "/"
 
 serviceAccount:
   create: true
