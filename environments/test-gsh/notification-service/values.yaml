@@ -1,3 +1,5 @@
+serviceType: api
+
 replicaCount: 1
 
 image:

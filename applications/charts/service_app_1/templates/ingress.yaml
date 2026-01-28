@@ -20,7 +20,7 @@ metadata:
   namespace: {{ $namespace }}
   annotations:
     {{- if $ingressData.tlsEnabled }}
-    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    cert-manager.io/cluster-issuer: {{ $.Values.global.clusterIssuer | default "letsencrypt-prod" | quote }}
     {{- end }}
 spec:
   ingressClassName: {{ $ingressData.ingressClass }}

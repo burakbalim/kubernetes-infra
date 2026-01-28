@@ -25,6 +25,13 @@ data:
       }
       cache
     }
+    
+    api.staging-gsh.int.getspeakhub.com:53 {
+      hosts {
+        31.59.131.47 api.staging-gsh.int.getspeakhub.com
+      }
+      cache
+    }
 
     # Varsayılan K8s DNS ayarları
     .:53 {

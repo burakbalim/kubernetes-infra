@@ -1,5 +1,3 @@
-serviceType: app
-
 replicaCount: 1
 
 image:

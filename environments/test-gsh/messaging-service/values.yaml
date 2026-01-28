@@ -25,7 +25,7 @@ secrets:
 ingress:
   enabled: true
   items:
-    - external-ingress
+    - internal-ingress
 
 ingress_path: "/messaging-service"
 

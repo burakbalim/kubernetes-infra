@@ -1,4 +1,5 @@
 global:
+  clusterIssuer: "letsencrypt-staging"
   ingressCatalog:
     external-ingress:
       domain: "staging.getspeakhub.com" # Normal mod için
