@@ -3,9 +3,9 @@ entries:
   postgresql:
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2026-01-31T21:30:53.334234+03:00"
+    created: "2026-01-31T21:40:13.820709+03:00"
     description: A Helm chart for Kubernetes
-    digest: d5461021d336483dd1d9030420bbed67d1efc47857ab05696ce4422cffc18647
+    digest: 78e6fe24186848784d7d97d83595f9a0d687b8c196c38ec5015b20b6ce63c52e
     name: postgresql
     type: application
     urls:
@@ -14,9 +14,9 @@ entries:
   postgresql-slave:
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2026-01-31T21:30:53.334335+03:00"
+    created: "2026-01-31T21:40:13.820829+03:00"
     description: A Helm chart for Kubernetes
-    digest: 5f317e4c815afc32626ef6f50cbe46c51f6fa50d16ce387b1c4ac443cdd6fef0
+    digest: f216cc62ed2daaab98b94bfb231b4ce865be742a201375eb7607091cbe7d0e27
     name: postgresql-slave
     type: application
     urls:
@@ -25,9 +25,9 @@ entries:
   service:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2026-01-31T21:30:53.334459+03:00"
+    created: "2026-01-31T21:40:13.82097+03:00"
     description: A Helm chart for Kubernetes
-    digest: 7cc1e2de37e3d2f8ae289886e520ffe222407e1ec66b6a81400d0ad437a0476c
+    digest: 9984f57eaa2753079c7a1353b4fb6cbd3da2a8769b75db9531dcb6f05c91de1e
     name: service
     type: application
     urls:
@@ -36,12 +36,12 @@ entries:
   service-config:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2026-01-31T21:30:53.334573+03:00"
+    created: "2026-01-31T21:40:13.821098+03:00"
     description: A Helm chart for Kubernetes
-    digest: 1ac00eeb9cd862239991bb69fca3ca35f53e8e697b85a492c11e99a2675cfb35
+    digest: 833ac37b55ee003a0b3044176a1247e6f0f237414df52569edd30a1c174ca095
     name: service-config
     type: application
     urls:
     - https://burakbalim.github.io/kubernetes-infra/helm-packages/service-config-0.1.0.tgz
     version: 0.1.0
-generated: "2026-01-31T21:30:53.334014+03:00"
+generated: "2026-01-31T21:40:13.820282+03:00"
