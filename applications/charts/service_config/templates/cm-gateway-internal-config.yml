@@ -64,7 +64,7 @@ data:
     {
       "services": [
         {
-          "service_url": "http://{{ .Values.services.userResource }}.{{ .Values.services.namespace }}.svc.cluster.local",
+          "service_url": "http://{{ .Values.services.oauthResourceName }}.{{ .Release.Namespace }}.svc.cluster.local",
           "service_name": "user-resource-service",
           "access_client": [
             "THIRD_PARTY",
@@ -74,7 +74,7 @@ data:
           ]
         },
         {
-          "service_url": "http://word-flashy-service.staging.svc.cluster.local",
+          "service_url": "http://{{ .Values.services.getSpeakHubName }}.{{ .Release.Namespace }}.svc.cluster.local",
           "service_name": "getspeakhub-service",
           "access_client": [
             "THIRD_PARTY",
