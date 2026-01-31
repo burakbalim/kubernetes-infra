@@ -30,7 +30,7 @@ volumes:
       sources:
         - configMap:
             name: gateway-internal-config
-        - configMap:
+        - secret:
             name: oauth2-secret-config
 
 volumeMounts:
