@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: gateway-internal-config
 data:
-  custom-paths.json: |
+  custom_paths.json: |
      []
   logger.json: |
     {
