@@ -1,4 +1,5 @@
 global:
+  env: test
   domain: getspeakhub.com
   envPrefix: staging-gsh
   clusterDomain: svc.cluster.local
@@ -25,9 +26,10 @@ auth:
 
 notification:
   emailDirectory: templates/email/getspeakhub/
+  emailSender: NoReply <noreply@getspeakhub.com>
   smtp:
     url: smtp.resend.com
-    port: 465
+    port: 587
     username: resend
 
 gateway:

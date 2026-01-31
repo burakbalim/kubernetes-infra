@@ -6,14 +6,12 @@ image:
   tag: latest
   pullSecret: ghcr-secret
 
-env:
-  - name: "API_GATEWAY_URL"
-    value: "/api"
-  - name: "APP_ENV"
-    value: "test"
-  - name: "APP_VERSION"
-    value: "1.0.0"
 
+configs:
+  - ui-config
+
+secret:
+  - ui-secret
 
 ingress:
   enabled: true
