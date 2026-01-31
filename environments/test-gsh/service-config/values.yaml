@@ -4,9 +4,6 @@ global:
   envPrefix: staging-gsh
   clusterDomain: svc.cluster.local
 
-core:
-  mountedDirectory: ""
-
 databases:
   mongoServiceName: mongo
   postgresServiceName: postgres
@@ -34,4 +31,5 @@ notification:
     username: resend
 
 gateway:
-  mountedDirectory: ""
+  mountedDirectory: "/configuration/"
+  configurationProvider: "FILE"
