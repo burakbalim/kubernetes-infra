@@ -1,0 +1,89 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gateway-internal-config
+data:
+  custom-paths.json: |
+     []
+  logger.json: |
+    {
+      "enable": true,
+      "custom_paths": [],
+      "threshold_min": 5,
+      "all_path_match": false,
+      "gw_task_subscriber": false
+    }
+  middlewares.json: |
+    [
+      {
+        "name": "userCreationMiddleware",
+        "extended_paths": {
+          "url_rewrites": [
+            {
+              "path": "/create",
+              "method": "POST",
+              "rewrite_to": "/user-service/create",
+              "match_pattern": "/create$"
+            }
+          ],
+          "transform_headers": [
+            {
+              "path": "/create",
+              "method": "POST",
+              "add_headers": {
+                "app-header": "9999"
+              },
+              "delete_headers": [
+                "authorization"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  policies.json: |
+    [
+      {
+        "per": 1,
+        "name": "applicationBasicAuthPolicy",
+        "rate": 5,
+        "state": "active",
+        "quota_max": 100,
+        "quota_renewal_rate": 60
+      },
+      {
+        "per": 1,
+        "name": "applicationEndpointPolicy",
+        "rate": 5,
+        "state": "active",
+        "quota_max": 100,
+        "quota_renewal_rate": 60
+      }
+    ]
+  router.json: |
+    {
+      "services": [
+        {
+          "service_url": "http://{{ .Values.services.userResource }}.{{ .Values.services.namespace }}.svc.cluster.local",
+          "service_name": "user-resource-service",
+          "access_client": [
+            "THIRD_PARTY",
+            "WEB_PAGE",
+            "PORTAL",
+            "ALLOWED_PATHS"
+          ]
+        },
+        {
+          "service_url": "http://word-flashy-service.staging.svc.cluster.local",
+          "service_name": "getspeakhub-service",
+          "access_client": [
+            "THIRD_PARTY",
+            "WEB_PAGE",
+            "PORTAL",
+            "ALLOWED_PATHS"
+          ]
+        }
+      ]
+    }
+  virtual_endpoints.json: |
+    []

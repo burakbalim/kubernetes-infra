@@ -3,9 +3,9 @@ entries:
   postgresql:
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2026-01-31T17:38:07.307413+03:00"
+    created: "2026-01-31T20:56:17.303216+03:00"
     description: A Helm chart for Kubernetes
-    digest: a1ed37ecdb3f4c2b10f34740d57f6380eae11c4b966092103f303c86ec31c8bf
+    digest: 131182139222353c74b5a987949fde5cc715b9e37b1ae761c29426b720540048
     name: postgresql
     type: application
     urls:
@@ -14,9 +14,9 @@ entries:
   postgresql-slave:
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2026-01-31T17:38:07.307541+03:00"
+    created: "2026-01-31T20:56:17.303318+03:00"
     description: A Helm chart for Kubernetes
-    digest: 9fcd476acb983bba5ef8098b2759dff0c4a5daf35799c88d90974ad1b55cff29
+    digest: 43772de0cebaa73ae46c14fc4c5a51fff09c86a027a166f07c0c8c8e65ca211c
     name: postgresql-slave
     type: application
     urls:
@@ -25,9 +25,9 @@ entries:
   service:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2026-01-31T17:38:07.307669+03:00"
+    created: "2026-01-31T20:56:17.303441+03:00"
     description: A Helm chart for Kubernetes
-    digest: 229170168dacae19878e7e5a4a916f474b540f15f012f7fbf1a3b97b0f5b855c
+    digest: 32014fd8dcc0c1c0fb5a47928362ef5531bc993a30b4a93342cc9c9d7341a807
     name: service
     type: application
     urls:
@@ -36,23 +36,12 @@ entries:
   service-config:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2026-01-31T17:38:07.307774+03:00"
+    created: "2026-01-31T20:56:17.303552+03:00"
     description: A Helm chart for Kubernetes
-    digest: 0454dbc5cd063e23a6793d23d0d8e402469abc39abbbba3d186b9ba60805606f
+    digest: b9937f41e1332e0638fea4e1899f4db59aeadae62946d4bc2fe6dcd497949e5a
     name: service-config
     type: application
     urls:
     - https://burakbalim.github.io/kubernetes-infra/helm-packages/service-config-0.1.0.tgz
     version: 0.1.0
-  service-secret:
-  - apiVersion: v2
-    appVersion: 1.16.0
-    created: "2026-01-31T17:38:07.307898+03:00"
-    description: A Helm chart for Kubernetes
-    digest: ef17a5d55e39b861509f87bd5f8eb3d9c85da2f24ddb700e4b9493423f38e87a
-    name: service-secret
-    type: application
-    urls:
-    - https://burakbalim.github.io/kubernetes-infra/helm-packages/service-secret-0.1.0.tgz
-    version: 0.1.0
-generated: "2026-01-31T17:38:07.306082+03:00"
+generated: "2026-01-31T20:56:17.303005+03:00"
