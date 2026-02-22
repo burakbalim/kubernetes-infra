@@ -82,6 +82,16 @@ data:
             "PORTAL",
             "ALLOWED_PATHS"
           ]
+        },
+        {
+          "service_url": "http://{{ .Values.services.messagingServiceName }}.{{ .Release.Namespace }}.svc.cluster.local",
+          "service_name": "messaging-service",
+          "access_client": [
+            "THIRD_PARTY",
+            "WEB_PAGE",
+            "PORTAL",
+            "ALLOWED_PATHS"
+          ]
         }
       ]
     }

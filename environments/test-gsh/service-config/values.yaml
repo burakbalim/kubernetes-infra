@@ -14,6 +14,7 @@ databases:
 services:
   notificationName: notification-service
   getSpeakHubName: getspeakhub-service
+  messagingServiceName: messaging-service
   oauthResourceName: user-resource-service
   logstashName: logstash
 
