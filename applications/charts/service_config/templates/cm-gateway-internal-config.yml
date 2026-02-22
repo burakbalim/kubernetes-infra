@@ -84,8 +84,8 @@ data:
           ]
         },
         {
-          "service_url": "http://{{ .Values.services.messagingServiceName }}.{{ .Release.Namespace }}.svc.cluster.local",
-          "service_name": "messaging-service",
+          "service_url": "http://{{ .Values.services.messagingHistoryServiceName }}.{{ .Release.Namespace }}.svc.cluster.local",
+          "service_name": "messaging-history-service",
           "access_client": [
             "THIRD_PARTY",
             "WEB_PAGE",
