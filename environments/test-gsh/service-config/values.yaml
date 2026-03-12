@@ -10,6 +10,8 @@ databases:
   postgresPort: 5432
   redisServiceName: redis
   redisPort: 6379
+  rabbitHost: rabbitmq
+  rabbitPort: 5672
 
 services:
   notificationName: notification-service

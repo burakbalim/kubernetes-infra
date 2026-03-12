@@ -19,7 +19,7 @@ data:
       cache
     }
 
-    tekton.int.wordflashy.com:53 {
+      tekton.int.wordflashy.com:53 {
       hosts {
         31.59.131.47 tekton.int.wordflashy.com
       }

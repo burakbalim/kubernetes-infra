@@ -9,5 +9,5 @@ data:
   POSTGRES_HOST: "{{ .Values.databases.postgresServiceName }}.{{ .Release.Namespace }}.{{ .Values.global.clusterDomain }}:{{ .Values.databases.postgresPort }}"
   REDIS_HOST: "{{ .Values.databases.redisServiceName }}.{{ .Release.Namespace }}.{{ .Values.global.clusterDomain }}"
   REDIS_PORT: {{ .Values.databases.redisPort | quote }}
-  RABBIT_HOST: {{ .Values.databases.rabbitHost | quote }}
+  RABBIT_HOST: "{{ .Values.databases.rabbitHost | quote }}"
   RABBIT_PORT: {{ .Values.databases.rabbitPort | quote }}
